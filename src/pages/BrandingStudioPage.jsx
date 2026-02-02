@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from '@dnd-kit/core'
 import { arrayMove, SortableContext, useSortable, rectSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import html2canvas from 'html2canvas'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
+import Badge from '../components/ui/Badge'
 import Modal from '../components/ui/Modal'
+import Toast from '../components/ui/Toast'
 import usePuterAI from '../hooks/usePuterAI'
 import { useSavedBrands } from '../hooks/useDexieStorage'
 
@@ -73,11 +76,34 @@ function BrandingStudioPage() {
     const [selectedVibe, setSelectedVibe] = useState(null)
     const [aiMoodboard, setAiMoodboard] = useState(null)
     const [showExportModal, setShowExportModal] = useState(false)
+    const [previewBrand, setPreviewBrand] = useState(null)
+    const [isExporting, setIsExporting] = useState(false)
+    const [toast, setToast] = useState({ show: false, message: '', type: 'success' })
+
+    const previewRef = useRef(null)
 
     // Dexie.js persistent storage
-    const { savedBrands, saveBrand: saveBrandToDB, removeBrand, isLoading: isLoadingBrands } = useSavedBrands()
+    const { savedBrands, saveBrand: saveBrandToDB, removeBrand, updateBrand, isLoading: isLoadingBrands } = useSavedBrands()
 
     const { generateMoodboard, isLoading } = usePuterAI()
+
+    // Load last saved brand on mount
+    useEffect(() => {
+        if (!isLoadingBrands && savedBrands.length > 0) {
+            const lastBrand = savedBrands[savedBrands.length - 1]
+            setBrandName(lastBrand.name || '')
+            if (lastBrand.vibe) {
+                const vibe = vibePresets.find(v => v.name === lastBrand.vibe)
+                setSelectedVibe(vibe || null)
+            }
+            if (lastBrand.aiMoodboard) {
+                setAiMoodboard(lastBrand.aiMoodboard)
+            }
+            if (lastBrand.moodboard && lastBrand.moodboard.length > 0) {
+                setElements(lastBrand.moodboard)
+            }
+        }
+    }, [isLoadingBrands, savedBrands])
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -94,6 +120,10 @@ function BrandingStudioPage() {
                 return arrayMove(items, oldIndex, newIndex)
             })
         }
+    }
+
+    const showToast = (message, type = 'success') => {
+        setToast({ show: true, message, type })
     }
 
     const generateAIMoodboard = async () => {
@@ -134,12 +164,44 @@ function BrandingStudioPage() {
         const brand = {
             name: brandName || 'Untitled Brand',
             vibe: selectedVibe?.name,
-            moodboard: elements.slice(0, 6),
+            moodboard: elements,
             palette: aiMoodboard?.colors || [],
             aiMoodboard
         }
         await saveBrandToDB(brand)
+        showToast('🎨 Brand kit saved to your garden!')
         setShowExportModal(true)
+    }
+
+    const openPreview = (brand) => {
+        setPreviewBrand(brand)
+    }
+
+    const exportToPNG = async () => {
+        if (!previewRef.current) return
+
+        setIsExporting(true)
+        try {
+            const canvas = await html2canvas(previewRef.current, {
+                backgroundColor: '#FDF8F0',
+                scale: 2
+            })
+            const link = document.createElement('a')
+            link.download = `${previewBrand?.name || 'brand-kit'}.png`
+            link.href = canvas.toDataURL('image/png')
+            link.click()
+            showToast('📥 Brand kit exported as PNG!')
+        } catch (err) {
+            console.error('Export failed:', err)
+            showToast('Export failed', 'error')
+        } finally {
+            setIsExporting(false)
+        }
+    }
+
+    const deleteBrand = async (id) => {
+        await removeBrand(id)
+        showToast('Brand deleted', 'info')
     }
 
     return (
@@ -156,137 +218,162 @@ function BrandingStudioPage() {
                 <p className="text-bark/70 dark:text-linen/70">
                     Create your cottagecore brand identity with drag-drop moodboards
                 </p>
+                {savedBrands.length > 0 && (
+                    <Badge variant="moss" className="mt-2">
+                        {savedBrands.length} saved brand{savedBrands.length !== 1 ? 's' : ''}
+                    </Badge>
+                )}
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-                {/* Left Column - Brand Setup */}
-                <div className="space-y-6">
-                    {/* Brand Name Input */}
-                    <Card hover={false}>
-                        <label className="block text-lg font-handwritten text-bark dark:text-linen mb-3">
-                            What's your brand called?
-                        </label>
-                        <input
-                            type="text"
-                            value={brandName}
-                            onChange={(e) => setBrandName(e.target.value)}
-                            placeholder="e.g., Mossy Meadow Creations"
-                            className="w-full p-3 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
-                        />
-                    </Card>
-
-                    {/* Vibe Presets */}
-                    <Card hover={false}>
-                        <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
-                            Choose your vibe
-                        </h3>
-                        <div className="grid grid-cols-2 gap-2">
-                            {vibePresets.map((vibe) => (
-                                <button
-                                    key={vibe.name}
-                                    onClick={() => setSelectedVibe(vibe)}
-                                    className={`p-3 rounded-xl text-left transition-all ${selectedVibe?.name === vibe.name
-                                        ? 'bg-moss text-cream'
-                                        : 'bg-linen-light/50 dark:bg-bark/30 hover:bg-moss/10'
-                                        }`}
-                                >
-                                    <span className="font-medium text-sm">{vibe.name}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </Card>
-
-                    {/* AI Generate Button */}
-                    <Button
-                        onClick={generateAIMoodboard}
-                        loading={isLoading}
-                        className="w-full"
-                        disabled={!brandName && !selectedVibe}
+            {/* Loading State */}
+            {isLoadingBrands && (
+                <div className="text-center py-8">
+                    <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        className="inline-block text-4xl"
                     >
-                        ✨ Generate AI Moodboard
-                    </Button>
+                        🌿
+                    </motion.div>
+                    <p className="text-bark/60 dark:text-linen/60 mt-2">Loading your brands...</p>
                 </div>
+            )}
 
-                {/* Right Column - Moodboard Canvas */}
-                <div className="space-y-6">
-                    <Card hover={false}>
-                        <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
-                            Your Moodboard Canvas
-                        </h3>
-                        <p className="text-sm text-bark/60 dark:text-linen/60 mb-4">
-                            Drag and drop to rearrange elements
-                        </p>
+            {!isLoadingBrands && (
+                <div className="grid md:grid-cols-2 gap-6">
+                    {/* Left Column - Brand Setup */}
+                    <div className="space-y-6">
+                        {/* Brand Name Input */}
+                        <Card hover={false}>
+                            <label className="block text-lg font-handwritten text-bark dark:text-linen mb-3">
+                                What's your brand called?
+                            </label>
+                            <input
+                                type="text"
+                                value={brandName}
+                                onChange={(e) => setBrandName(e.target.value)}
+                                placeholder="e.g., Mossy Meadow Creations"
+                                className="w-full p-3 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
+                            />
+                        </Card>
 
-                        <DndContext
-                            sensors={sensors}
-                            collisionDetection={closestCenter}
-                            onDragEnd={handleDragEnd}
+                        {/* Vibe Presets */}
+                        <Card hover={false}>
+                            <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                                Choose your vibe
+                            </h3>
+                            <div className="grid grid-cols-2 gap-2">
+                                {vibePresets.map((vibe) => (
+                                    <button
+                                        key={vibe.name}
+                                        onClick={() => setSelectedVibe(vibe)}
+                                        className={`p-3 rounded-xl text-left transition-all ${selectedVibe?.name === vibe.name
+                                            ? 'bg-moss text-cream'
+                                            : 'bg-linen-light/50 dark:bg-bark/30 hover:bg-moss/10'
+                                            }`}
+                                    >
+                                        <span className="font-medium text-sm">{vibe.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </Card>
+
+                        {/* AI Generate Button */}
+                        <Button
+                            onClick={generateAIMoodboard}
+                            loading={isLoading}
+                            className="w-full"
+                            disabled={!brandName && !selectedVibe}
                         >
-                            <SortableContext items={elements} strategy={rectSortingStrategy}>
-                                <div className="grid grid-cols-5 gap-2 p-4 bg-linen-light/30 dark:bg-bark/20 rounded-xl min-h-[200px]">
-                                    {elements.map((element) => (
-                                        <SortableItem key={element.id} element={element} />
-                                    ))}
-                                </div>
-                            </SortableContext>
-                        </DndContext>
-                    </Card>
+                            ✨ Generate AI Moodboard
+                        </Button>
+                    </div>
 
-                    {/* AI Generated Moodboard */}
-                    {aiMoodboard && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                        >
-                            <Card hover={false}>
-                                <h3 className="text-lg font-handwritten text-moss-deep dark:text-moss-light mb-4">
-                                    ✨ AI-Generated Moodboard
-                                </h3>
+                    {/* Right Column - Moodboard Canvas */}
+                    <div className="space-y-6">
+                        <Card hover={false}>
+                            <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                                Your Moodboard Canvas
+                            </h3>
+                            <p className="text-sm text-bark/60 dark:text-linen/60 mb-4">
+                                Drag and drop to rearrange elements
+                            </p>
 
-                                {/* Colors */}
-                                <div className="mb-4">
-                                    <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Colors</span>
-                                    <div className="flex gap-2 mt-2">
-                                        {(aiMoodboard.colors || []).map((color, i) => (
-                                            <div
-                                                key={i}
-                                                className="w-10 h-10 rounded-lg shadow-sm"
-                                                style={{ backgroundColor: color }}
-                                                title={color}
-                                            />
+                            <DndContext
+                                sensors={sensors}
+                                collisionDetection={closestCenter}
+                                onDragEnd={handleDragEnd}
+                            >
+                                <SortableContext items={elements} strategy={rectSortingStrategy}>
+                                    <div className="grid grid-cols-5 gap-2 p-4 bg-linen-light/30 dark:bg-bark/20 rounded-xl min-h-[200px]">
+                                        {elements.map((element) => (
+                                            <SortableItem key={element.id} element={element} />
                                         ))}
                                     </div>
-                                </div>
+                                </SortableContext>
+                            </DndContext>
+                        </Card>
 
-                                {/* Adjectives */}
-                                <div className="mb-4">
-                                    <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Brand Adjectives</span>
-                                    <div className="flex flex-wrap gap-2 mt-2">
-                                        {(aiMoodboard.adjectives || []).map((adj, i) => (
-                                            <span key={i} className="px-3 py-1 bg-moss/10 text-moss rounded-full text-sm">
-                                                {adj}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
+                        {/* AI Generated Moodboard */}
+                        <AnimatePresence>
+                            {aiMoodboard && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                >
+                                    <Card hover={false}>
+                                        <h3 className="text-lg font-handwritten text-moss-deep dark:text-moss-light mb-4">
+                                            ✨ AI-Generated Moodboard
+                                        </h3>
 
-                                {/* Imagery */}
-                                <div>
-                                    <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Imagery Themes</span>
-                                    <p className="mt-1 text-bark dark:text-linen">
-                                        {(aiMoodboard.imagery || []).join(' • ')}
-                                    </p>
-                                </div>
-                            </Card>
-                        </motion.div>
-                    )}
+                                        {/* Colors */}
+                                        <div className="mb-4">
+                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Colors</span>
+                                            <div className="flex gap-2 mt-2">
+                                                {(aiMoodboard.colors || []).map((color, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="w-10 h-10 rounded-lg shadow-sm cursor-pointer hover:scale-110 transition-transform"
+                                                        style={{ backgroundColor: color }}
+                                                        title={color}
+                                                        onClick={() => navigator.clipboard.writeText(color)}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
 
-                    {/* Save Button */}
-                    <Button onClick={saveBrand} variant="moss" className="w-full">
-                        💾 Save Brand Kit
-                    </Button>
+                                        {/* Adjectives */}
+                                        <div className="mb-4">
+                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Brand Adjectives</span>
+                                            <div className="flex flex-wrap gap-2 mt-2">
+                                                {(aiMoodboard.adjectives || []).map((adj, i) => (
+                                                    <span key={i} className="px-3 py-1 bg-moss/10 text-moss rounded-full text-sm">
+                                                        {adj}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Imagery */}
+                                        <div>
+                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Imagery Themes</span>
+                                            <p className="mt-1 text-bark dark:text-linen">
+                                                {(aiMoodboard.imagery || []).join(' • ')}
+                                            </p>
+                                        </div>
+                                    </Card>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+
+                        {/* Save Button */}
+                        <Button onClick={saveBrand} variant="moss" className="w-full">
+                            💾 Save Brand Kit
+                        </Button>
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Saved Brands */}
             {savedBrands.length > 0 && (
@@ -295,10 +382,30 @@ function BrandingStudioPage() {
                         Your Saved Brands
                     </h3>
                     <div className="grid gap-2">
-                        {savedBrands.map((brand, i) => (
-                            <div key={i} className="flex items-center justify-between p-3 bg-linen-light/30 dark:bg-bark/20 rounded-xl">
-                                <span className="font-medium text-bark dark:text-linen">{brand.name}</span>
-                                <span className="text-sm text-bark/60 dark:text-linen/60">{brand.vibe || 'Custom'}</span>
+                        {savedBrands.map((brand) => (
+                            <div key={brand.id} className="flex items-center justify-between p-3 bg-linen-light/30 dark:bg-bark/20 rounded-xl group">
+                                <div className="flex items-center gap-3">
+                                    {/* Color preview dots */}
+                                    <div className="flex -space-x-1">
+                                        {(brand.palette || []).slice(0, 4).map((color, i) => (
+                                            <div
+                                                key={i}
+                                                className="w-5 h-5 rounded-full border-2 border-cream"
+                                                style={{ backgroundColor: color }}
+                                            />
+                                        ))}
+                                    </div>
+                                    <span className="font-medium text-bark dark:text-linen">{brand.name}</span>
+                                    <span className="text-sm text-bark/60 dark:text-linen/60">{brand.vibe || 'Custom'}</span>
+                                </div>
+                                <div className="flex gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                                    <Button size="sm" variant="ghost" onClick={() => openPreview(brand)} title="Preview">
+                                        👁️
+                                    </Button>
+                                    <Button size="sm" variant="ghost" onClick={() => deleteBrand(brand.id)} title="Delete" className="hover:text-red-500">
+                                        🗑️
+                                    </Button>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -318,6 +425,105 @@ function BrandingStudioPage() {
                     Continue Creating
                 </Button>
             </Modal>
+
+            {/* Preview Modal */}
+            <Modal
+                isOpen={!!previewBrand}
+                onClose={() => setPreviewBrand(null)}
+                title={`${previewBrand?.name || 'Brand'} Preview`}
+            >
+                {previewBrand && (
+                    <div className="space-y-4">
+                        {/* Exportable preview area */}
+                        <div ref={previewRef} className="p-6 bg-cream rounded-xl space-y-4">
+                            <h2 className="text-2xl font-handwritten text-bark text-center">
+                                {previewBrand.name}
+                            </h2>
+
+                            {/* Color Palette */}
+                            {previewBrand.palette && previewBrand.palette.length > 0 && (
+                                <div>
+                                    <span className="text-sm font-medium text-bark/60 block mb-2">Color Palette</span>
+                                    <div className="flex gap-2 justify-center">
+                                        {previewBrand.palette.map((color, i) => (
+                                            <div key={i} className="text-center">
+                                                <div
+                                                    className="w-12 h-12 rounded-lg shadow-md"
+                                                    style={{ backgroundColor: color }}
+                                                />
+                                                <span className="text-xs text-bark/60 mt-1 block">{color}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Vibe */}
+                            {previewBrand.vibe && (
+                                <div className="text-center">
+                                    <span className="text-sm font-medium text-bark/60 block mb-1">Vibe</span>
+                                    <Badge variant="moss">{previewBrand.vibe}</Badge>
+                                </div>
+                            )}
+
+                            {/* Adjectives */}
+                            {previewBrand.aiMoodboard?.adjectives && (
+                                <div className="text-center">
+                                    <span className="text-sm font-medium text-bark/60 block mb-2">Brand Personality</span>
+                                    <div className="flex flex-wrap gap-2 justify-center">
+                                        {previewBrand.aiMoodboard.adjectives.map((adj, i) => (
+                                            <span key={i} className="px-3 py-1 bg-moss/10 text-moss rounded-full text-sm">
+                                                {adj}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex gap-2">
+                            <Button
+                                variant="linen"
+                                onClick={() => {
+                                    // Load into editor
+                                    setBrandName(previewBrand.name)
+                                    if (previewBrand.vibe) {
+                                        const vibe = vibePresets.find(v => v.name === previewBrand.vibe)
+                                        setSelectedVibe(vibe || null)
+                                    }
+                                    if (previewBrand.aiMoodboard) {
+                                        setAiMoodboard(previewBrand.aiMoodboard)
+                                    }
+                                    if (previewBrand.moodboard) {
+                                        setElements(previewBrand.moodboard)
+                                    }
+                                    setPreviewBrand(null)
+                                    showToast('Brand loaded for editing!')
+                                }}
+                                className="flex-1"
+                            >
+                                ✏️ Edit
+                            </Button>
+                            <Button
+                                onClick={exportToPNG}
+                                loading={isExporting}
+                                className="flex-1"
+                            >
+                                📥 Export PNG
+                            </Button>
+                        </div>
+                    </div>
+                )}
+            </Modal>
+
+            {/* Toast */}
+            <Toast
+                show={toast.show}
+                message={toast.message}
+                type={toast.type}
+                onClose={() => setToast({ ...toast, show: false })}
+            />
         </motion.div>
     )
 }

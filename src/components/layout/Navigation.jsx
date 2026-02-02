@@ -36,9 +36,10 @@ const icons = {
 
 function Navigation() {
     return (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 md:top-1/2 md:bottom-auto md:-translate-y-1/2 md:left-auto md:right-4">
-            <div className="glass-card mx-4 mb-4 md:m-0 md:rounded-2xl">
-                <ul className="flex md:flex-col items-center justify-around md:justify-center md:py-4 md:px-2 md:gap-4">
+        <nav className="fixed bottom-0 left-0 right-0 z-50 md:top-0 md:bottom-0 md:right-auto md:left-0 md:w-20">
+            {/* Mobile: Bottom bar | Desktop: Left sidebar */}
+            <div className="glass-card mx-4 mb-4 md:m-0 md:rounded-none md:h-full md:flex md:flex-col md:justify-center">
+                <ul className="flex md:flex-col items-center justify-around md:justify-center md:py-4 md:px-2 md:gap-2">
                     {navItems.map((item) => (
                         <li key={item.path}>
                             <NavLink

@@ -9,8 +9,9 @@ function Layout({ children }) {
             <ParallaxBackground />
             <Header />
 
+            {/* Main content with left padding for desktop sidebar */}
             <motion.main
-                className="flex-1 pb-20 md:pb-6 px-4 md:px-8 max-w-6xl mx-auto w-full"
+                className="flex-1 pb-20 md:pb-6 md:pl-24 px-4 md:px-8 max-w-6xl w-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
