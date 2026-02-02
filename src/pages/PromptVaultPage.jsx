@@ -5,7 +5,7 @@ import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import Modal from '../components/ui/Modal'
 import usePuterAI from '../hooks/usePuterAI'
-import useLocalStorage from '../hooks/useLocalStorage'
+import { useSavedPrompts } from '../hooks/useDexieStorage'
 import promptsData from '../data/prompts.json'
 
 function PromptVaultPage() {
@@ -14,7 +14,9 @@ function PromptVaultPage() {
     const [selectedPrompt, setSelectedPrompt] = useState(null)
     const [refinedPrompt, setRefinedPrompt] = useState(null)
     const [copiedId, setCopiedId] = useState(null)
-    const [savedPrompts, setSavedPrompts] = useLocalStorage('moss-saved-prompts', [])
+
+    // Dexie.js persistent storage
+    const { savedPrompts, savePrompt: savePromptToDB, removePrompt, isSaved, isLoading: isLoadingPrompts } = useSavedPrompts()
 
     const { refinePrompt, isLoading } = usePuterAI()
 
@@ -72,17 +74,22 @@ function PromptVaultPage() {
         }
     }
 
-    const savePrompt = (prompt) => {
-        if (!savedPrompts.find(p => p.id === prompt.id)) {
-            setSavedPrompts(prev => [...prev, { ...prompt, savedAt: new Date().toISOString() }])
+    const handleSavePrompt = async (prompt) => {
+        if (!isSaved(prompt.id)) {
+            await savePromptToDB({
+                ...prompt,
+                originalId: prompt.id,
+                category: prompt.categoryId
+            })
         }
     }
 
-    const removeFromSaved = (promptId) => {
-        setSavedPrompts(prev => prev.filter(p => p.id !== promptId))
+    const handleRemovePrompt = async (promptId) => {
+        const saved = savedPrompts.find(p => p.originalId === promptId || p.id === promptId)
+        if (saved) {
+            await removePrompt(saved.id)
+        }
     }
-
-    const isSaved = (promptId) => savedPrompts.some(p => p.id === promptId)
 
     return (
         <motion.div
@@ -129,8 +136,8 @@ function PromptVaultPage() {
                 <button
                     onClick={() => setSelectedCategory(null)}
                     className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${!selectedCategory
-                            ? 'bg-moss text-cream'
-                            : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                        ? 'bg-moss text-cream'
+                        : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
                         }`}
                 >
                     ✨ All
@@ -140,8 +147,8 @@ function PromptVaultPage() {
                         key={category.id}
                         onClick={() => setSelectedCategory(category.id)}
                         className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category.id
-                                ? 'bg-moss text-cream'
-                                : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                            ? 'bg-moss text-cream'
+                            : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
                             }`}
                     >
                         {category.icon} {category.name}
@@ -201,7 +208,7 @@ function PromptVaultPage() {
                                     <Button
                                         size="sm"
                                         variant="ghost"
-                                        onClick={() => isSaved(prompt.id) ? removeFromSaved(prompt.id) : savePrompt(prompt)}
+                                        onClick={() => isSaved(prompt.id) ? handleRemovePrompt(prompt.id) : handleSavePrompt(prompt)}
                                     >
                                         {isSaved(prompt.id) ? '💚' : '🤍'}
                                     </Button>
@@ -240,7 +247,7 @@ function PromptVaultPage() {
                                     <Button size="sm" variant="ghost" onClick={() => copyToClipboard(prompt)}>
                                         📋
                                     </Button>
-                                    <Button size="sm" variant="ghost" onClick={() => removeFromSaved(prompt.id)}>
+                                    <Button size="sm" variant="ghost" onClick={() => removePrompt(prompt.id)}>
                                         ✕
                                     </Button>
                                 </div>

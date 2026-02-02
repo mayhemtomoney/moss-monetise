@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from '@dnd-kit/core'
 import { arrayMove, SortableContext, useSortable, rectSortingStrategy } from '@dnd-kit/sortable'
@@ -7,7 +7,7 @@ import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import Modal from '../components/ui/Modal'
 import usePuterAI from '../hooks/usePuterAI'
-import useLocalStorage from '../hooks/useLocalStorage'
+import { useSavedBrands } from '../hooks/useDexieStorage'
 
 const defaultElements = [
     { id: 'color1', type: 'color', value: '#8B9A46', label: 'Moss Green' },
@@ -73,7 +73,9 @@ function BrandingStudioPage() {
     const [selectedVibe, setSelectedVibe] = useState(null)
     const [aiMoodboard, setAiMoodboard] = useState(null)
     const [showExportModal, setShowExportModal] = useState(false)
-    const [savedBrands, setSavedBrands] = useLocalStorage('moss-saved-brands', [])
+
+    // Dexie.js persistent storage
+    const { savedBrands, saveBrand: saveBrandToDB, removeBrand, isLoading: isLoadingBrands } = useSavedBrands()
 
     const { generateMoodboard, isLoading } = usePuterAI()
 
@@ -128,15 +130,15 @@ function BrandingStudioPage() {
         }
     }
 
-    const saveBrand = () => {
+    const saveBrand = async () => {
         const brand = {
             name: brandName || 'Untitled Brand',
             vibe: selectedVibe?.name,
-            elements: elements.slice(0, 6),
-            aiMoodboard,
-            savedAt: new Date().toISOString()
+            moodboard: elements.slice(0, 6),
+            palette: aiMoodboard?.colors || [],
+            aiMoodboard
         }
-        setSavedBrands(prev => [...prev, brand])
+        await saveBrandToDB(brand)
         setShowExportModal(true)
     }
 
@@ -184,8 +186,8 @@ function BrandingStudioPage() {
                                     key={vibe.name}
                                     onClick={() => setSelectedVibe(vibe)}
                                     className={`p-3 rounded-xl text-left transition-all ${selectedVibe?.name === vibe.name
-                                            ? 'bg-moss text-cream'
-                                            : 'bg-linen-light/50 dark:bg-bark/30 hover:bg-moss/10'
+                                        ? 'bg-moss text-cream'
+                                        : 'bg-linen-light/50 dark:bg-bark/30 hover:bg-moss/10'
                                         }`}
                                 >
                                     <span className="font-medium text-sm">{vibe.name}</span>

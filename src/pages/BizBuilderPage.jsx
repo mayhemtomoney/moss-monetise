@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
@@ -6,60 +6,67 @@ import Badge from '../components/ui/Badge'
 import ProgressBar from '../components/ui/ProgressBar'
 import Timer from '../components/ui/Timer'
 import Modal from '../components/ui/Modal'
-import useLocalStorage from '../hooks/useLocalStorage'
+import { useUserProgress } from '../hooks/useDexieStorage'
 import bizModules from '../data/biz-modules.json'
 
 function BizBuilderPage() {
     const [currentModule, setCurrentModule] = useState(0)
-    const [completedTasks, setCompletedTasks] = useLocalStorage('moss-biz-tasks', {})
-    const [earnedBadges, setEarnedBadges] = useLocalStorage('moss-biz-badges', [])
     const [showBadgeModal, setShowBadgeModal] = useState(false)
     const [newBadge, setNewBadge] = useState(null)
     const [showTimer, setShowTimer] = useState(false)
+
+    // Dexie.js persistent storage
+    const {
+        progress,
+        earnedBadges,
+        totalPoints,
+        updateModuleProgress,
+        getModuleProgress: getStoredProgress,
+        addBadge,
+        addPoints,
+        isLoading
+    } = useUserProgress()
 
     const modules = bizModules.modules
     const module = modules[currentModule]
 
     const getModuleProgress = (moduleId) => {
-        const moduleTasks = completedTasks[moduleId] || []
+        const storedProgress = getStoredProgress(moduleId)
+        const moduleTasks = storedProgress.completedTasks || []
         const totalTasks = modules.find(m => m.id === moduleId)?.checklist.length || 1
         return (moduleTasks.length / totalTasks) * 100
     }
 
     const getTotalPoints = () => {
-        let total = 0
-        Object.entries(completedTasks).forEach(([moduleId, tasks]) => {
-            const moduleData = modules.find(m => m.id === moduleId)
-            if (moduleData) {
-                tasks.forEach(taskId => {
-                    const task = moduleData.checklist.find(t => t.id === taskId)
-                    if (task) total += task.points
-                })
-            }
-        })
-        return total
+        return totalPoints
     }
 
-    const toggleTask = (taskId, points) => {
-        const moduleTasks = completedTasks[module.id] || []
+    const toggleTask = async (taskId, points) => {
+        const storedProgress = getStoredProgress(module.id)
+        const moduleTasks = storedProgress.completedTasks || []
         const isCompleted = moduleTasks.includes(taskId)
 
         let newTasks
+        let newPoints = storedProgress.points || 0
+
         if (isCompleted) {
             newTasks = moduleTasks.filter(id => id !== taskId)
+            newPoints -= points
         } else {
             newTasks = [...moduleTasks, taskId]
+            newPoints += points
         }
 
-        setCompletedTasks(prev => ({
-            ...prev,
-            [module.id]: newTasks
-        }))
+        await updateModuleProgress(module.id, {
+            completedTasks: newTasks,
+            points: newPoints,
+            badges: storedProgress.badges || []
+        })
 
         // Check for badge unlock
         if (!isCompleted && newTasks.length === module.checklist.length) {
             if (!earnedBadges.includes(module.id)) {
-                setEarnedBadges(prev => [...prev, module.id])
+                await addBadge(module.id, module.id)
                 setNewBadge(module.badge)
                 setShowBadgeModal(true)
             }
@@ -67,7 +74,8 @@ function BizBuilderPage() {
     }
 
     const isTaskCompleted = (taskId) => {
-        return (completedTasks[module.id] || []).includes(taskId)
+        const storedProgress = getStoredProgress(module.id)
+        return (storedProgress.completedTasks || []).includes(taskId)
     }
 
     const handleSwipe = (direction) => {
@@ -104,8 +112,8 @@ function BizBuilderPage() {
                         key={m.id}
                         onClick={() => setCurrentModule(index)}
                         className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${currentModule === index
-                                ? 'bg-moss text-cream'
-                                : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                            ? 'bg-moss text-cream'
+                            : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
                             }`}
                     >
                         <span className="mr-1">{m.icon}</span>
@@ -148,15 +156,15 @@ function BizBuilderPage() {
                                     key={task.id}
                                     layout
                                     className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isTaskCompleted(task.id)
-                                            ? 'bg-moss/10'
-                                            : 'bg-linen-light/30 dark:bg-bark/20'
+                                        ? 'bg-moss/10'
+                                        : 'bg-linen-light/30 dark:bg-bark/20'
                                         }`}
                                 >
                                     <button
                                         onClick={() => toggleTask(task.id, task.points)}
                                         className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${isTaskCompleted(task.id)
-                                                ? 'bg-moss border-moss text-cream'
-                                                : 'border-moss/40 hover:border-moss'
+                                            ? 'bg-moss border-moss text-cream'
+                                            : 'border-moss/40 hover:border-moss'
                                             }`}
                                     >
                                         {isTaskCompleted(task.id) && (
