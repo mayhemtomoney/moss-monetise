@@ -39,7 +39,6 @@ function NichePickerPage() {
     const generateResults = async (finalAnswers) => {
         setShowResults(true)
 
-        // Map answers to readable format
         const answerSummary = {
             interests: Object.values(finalAnswers)[0]?.label || 'various interests',
             skills: Object.values(finalAnswers)[1]?.label || 'diverse skills',
@@ -50,7 +49,6 @@ function NichePickerPage() {
 
         try {
             const response = await generateNicheSuggestions(answerSummary)
-            // Try to parse JSON from response
             const jsonMatch = response.match(/\[[\s\S]*\]/)
             if (jsonMatch) {
                 setSuggestions(JSON.parse(jsonMatch[0]))
@@ -64,7 +62,6 @@ function NichePickerPage() {
             }
         } catch (err) {
             console.error('AI generation error:', err)
-            // Fallback suggestions
             setSuggestions([
                 {
                     name: "Botanical Planning Paradise",
@@ -90,6 +87,7 @@ function NichePickerPage() {
 
     const saveNiche = (niche) => {
         setSavedNiches(prev => [...prev, { ...niche, savedAt: new Date().toISOString() }])
+        localStorage.setItem('moss-niche-results', JSON.stringify(niche))
         setShowSaveModal(true)
     }
 
@@ -101,7 +99,6 @@ function NichePickerPage() {
     }
 
     const exportToPdf = async () => {
-        // Dynamic import for code splitting
         const html2canvas = (await import('html2canvas')).default
         const jsPDF = (await import('jspdf')).default
 
@@ -109,7 +106,7 @@ function NichePickerPage() {
         if (!element) return
 
         const canvas = await html2canvas(element, {
-            backgroundColor: '#FDF8F0',
+            backgroundColor: '#f5ecd7',
             scale: 2
         })
         const imgData = canvas.toDataURL('image/png')
@@ -130,24 +127,25 @@ function NichePickerPage() {
         >
             {/* Header */}
             <div className="text-center">
-                <h1 className="text-4xl font-handwritten text-bark dark:text-linen mb-2">
+                <h2 className="text-3xl md:text-4xl font-handwritten mb-2" style={{ color: '#d2b48c' }}>
                     🌸 Wildflower Niche Picker
-                </h1>
-                <p className="text-bark/70 dark:text-linen/70">
+                </h2>
+                <p className="text-amber/70">
                     Discover your perfect digital product niche in 5 cozy questions
                 </p>
             </div>
 
             {/* Progress */}
             {!showResults && (
-                <div className="glass-card p-4">
-                    <div className="flex justify-between text-sm text-bark/60 dark:text-linen/60 mb-2">
+                <div className="parchment-card">
+                    <div className="flex justify-between text-sm mb-2" style={{ color: '#5a4a3a' }}>
                         <span>Question {currentQuestion + 1} of {questions.length}</span>
                         <span>{Math.round(progress)}% complete</span>
                     </div>
-                    <div className="h-2 bg-linen-light dark:bg-bark/30 rounded-full">
+                    <div className="h-3 bg-parchment-dark/30 rounded-full overflow-hidden">
                         <motion.div
-                            className="h-full bg-gradient-to-r from-petal to-berry rounded-full"
+                            className="h-full rounded-full"
+                            style={{ background: 'linear-gradient(90deg, #8B4557, #E8A4B0)' }}
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
                         />
@@ -165,17 +163,26 @@ function NichePickerPage() {
                         exit={{ opacity: 0, x: -50 }}
                     >
                         <Card hover={false}>
-                            <h2 className="text-2xl font-handwritten text-bark dark:text-linen mb-6 text-center">
+                            <h3 className="text-2xl font-handwritten text-center mb-6" style={{ color: '#3d2b1f' }}>
                                 {questions[currentQuestion].question}
-                            </h2>
+                            </h3>
 
                             <div className="grid gap-3">
                                 {questions[currentQuestion].options.map((option) => (
                                     <motion.button
                                         key={option.value}
                                         onClick={() => handleAnswer(option)}
-                                        className="w-full p-4 text-left rounded-xl border-2 border-moss/20 hover:border-moss hover:bg-moss/5 transition-all"
-                                        whileHover={{ scale: 1.02 }}
+                                        className="w-full p-4 text-left rounded-lg border-2 transition-all"
+                                        style={{
+                                            borderColor: '#d4c4a8',
+                                            background: 'rgba(245, 236, 215, 0.5)',
+                                            color: '#3d2b1f'
+                                        }}
+                                        whileHover={{
+                                            scale: 1.02,
+                                            borderColor: '#d2b48c',
+                                            background: 'rgba(210, 180, 140, 0.2)'
+                                        }}
                                         whileTap={{ scale: 0.98 }}
                                     >
                                         <span className="text-lg">{option.label}</span>
@@ -198,24 +205,18 @@ function NichePickerPage() {
                     <Card hover={false}>
                         <div className="text-center mb-6">
                             <span className="text-4xl">🌻</span>
-                            <h2 className="text-3xl font-handwritten text-bark dark:text-linen mt-2">
+                            <h2 className="text-3xl font-handwritten mt-2" style={{ color: '#3d2b1f' }}>
                                 Your Niche Garden
                             </h2>
-                            <p className="text-bark/60 dark:text-linen/60">
+                            <p style={{ color: '#5a4a3a' }}>
                                 AI-curated suggestions based on your unique blend
                             </p>
                         </div>
 
                         {isLoading && (
                             <div className="text-center py-8">
-                                <div className="animate-spin w-8 h-8 border-4 border-moss border-t-transparent rounded-full mx-auto mb-4" />
-                                <p className="text-bark/60 dark:text-linen/60">Growing your niche suggestions...</p>
-                            </div>
-                        )}
-
-                        {error && (
-                            <div className="text-center py-4 text-berry">
-                                <p>Oops! Something went wrong. Using curated suggestions instead.</p>
+                                <div className="animate-spin w-8 h-8 border-4 border-amber border-t-transparent rounded-full mx-auto mb-4" />
+                                <p style={{ color: '#5a4a3a' }}>Growing your niche suggestions...</p>
                             </div>
                         )}
 
@@ -227,34 +228,37 @@ function NichePickerPage() {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.2 }}
-                                        className="p-5 bg-linen-light/50 dark:bg-bark/30 rounded-2xl"
+                                        className="p-5 rounded-xl"
+                                        style={{ background: 'rgba(212, 196, 168, 0.3)' }}
                                     >
                                         <div className="flex items-start justify-between mb-3">
-                                            <h3 className="text-xl font-handwritten text-moss-deep dark:text-moss-light">
+                                            <h3 className="text-xl font-handwritten" style={{ color: '#1e2a1e' }}>
                                                 {niche.name}
                                             </h3>
-                                            <Button
-                                                size="sm"
-                                                variant="ghost"
+                                            <button
                                                 onClick={() => saveNiche(niche)}
+                                                className="wood-cta-btn text-sm py-2 px-3"
                                             >
                                                 💾 Save
-                                            </Button>
+                                            </button>
                                         </div>
 
                                         <div className="mb-3">
-                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Product Ideas:</span>
+                                            <span className="text-sm font-medium" style={{ color: '#5a4a3a' }}>Product Ideas:</span>
                                             <div className="flex flex-wrap gap-2 mt-1">
                                                 {(Array.isArray(niche.products) ? niche.products : [niche.products]).map((product, i) => (
-                                                    <Badge key={i} variant="linen">{product}</Badge>
+                                                    <span key={i} className="px-2 py-1 rounded text-sm"
+                                                        style={{ background: '#e8dfc9', color: '#3d2b1f' }}>
+                                                        {product}
+                                                    </span>
                                                 ))}
                                             </div>
                                         </div>
 
-                                        <p className="text-sm text-bark/70 dark:text-linen/70 mb-2">
+                                        <p className="text-sm mb-2" style={{ color: '#5a4a3a' }}>
                                             <strong>Target:</strong> {niche.persona}
                                         </p>
-                                        <p className="text-sm text-moss italic">
+                                        <p className="text-sm italic" style={{ color: '#1e2a1e' }}>
                                             ✨ {niche.fit}
                                         </p>
                                     </motion.div>
@@ -265,12 +269,12 @@ function NichePickerPage() {
 
                     {/* Action Buttons */}
                     <div className="flex flex-wrap justify-center gap-3">
-                        <Button onClick={exportToPdf} variant="moss">
+                        <button onClick={exportToPdf} className="wood-cta-btn">
                             📄 Export as PDF
-                        </Button>
-                        <Button onClick={restartQuiz} variant="linen">
+                        </button>
+                        <button onClick={restartQuiz} className="wood-cta-btn">
                             🔄 Retake Quiz
-                        </Button>
+                        </button>
                     </div>
                 </motion.div>
             )}
@@ -281,13 +285,13 @@ function NichePickerPage() {
                 onClose={() => setShowSaveModal(false)}
                 title="Niche Saved! 🌱"
             >
-                <p className="mb-4">
+                <p className="mb-4" style={{ color: '#3d2b1f' }}>
                     Your niche has been saved to your collection. You can find it in your saved items anytime!
                 </p>
                 <div className="text-center">
-                    <Button onClick={() => setShowSaveModal(false)}>
+                    <button onClick={() => setShowSaveModal(false)} className="wood-cta-btn">
                         Continue Exploring
-                    </Button>
+                    </button>
                 </div>
             </Modal>
         </motion.div>
