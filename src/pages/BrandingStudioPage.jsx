@@ -9,7 +9,7 @@ import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import Modal from '../components/ui/Modal'
 import Toast from '../components/ui/Toast'
-import usePuterAI from '../hooks/usePuterAI'
+import useTransformersAI from '../hooks/useTransformersAI'
 import { useSavedBrands } from '../hooks/useDexieStorage'
 
 const defaultElements = [
@@ -85,7 +85,7 @@ function BrandingStudioPage() {
     // Dexie.js persistent storage
     const { savedBrands, saveBrand: saveBrandToDB, removeBrand, updateBrand, isLoading: isLoadingBrands } = useSavedBrands()
 
-    const { generateMoodboard, isLoading } = usePuterAI()
+    const { generateMoodboard, isLoading } = useTransformersAI()
 
     // Load last saved brand on mount
     useEffect(() => {

@@ -4,7 +4,7 @@ import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import Modal from '../components/ui/Modal'
-import usePuterAI from '../hooks/usePuterAI'
+import useTransformersAI from '../hooks/useTransformersAI'
 import useLocalStorage from '../hooks/useLocalStorage'
 import templates from '../data/product-templates.json'
 
@@ -15,7 +15,7 @@ function ProductForgePage() {
     const [savedProducts, setSavedProducts] = useLocalStorage('moss-saved-products', [])
     const [showExportModal, setShowExportModal] = useState(false)
 
-    const { generateProductDescription, isLoading } = usePuterAI()
+    const { generateProductDescription, isLoading } = useTransformersAI()
 
     const handleSelectTemplate = (template) => {
         setSelectedTemplate(template)

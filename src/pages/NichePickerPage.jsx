@@ -4,7 +4,7 @@ import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import Modal from '../components/ui/Modal'
-import usePuterAI from '../hooks/usePuterAI'
+import useTransformersAI from '../hooks/useTransformersAI'
 import useLocalStorage from '../hooks/useLocalStorage'
 import quizData from '../data/quiz-questions.json'
 
@@ -16,7 +16,7 @@ function NichePickerPage() {
     const [savedNiches, setSavedNiches] = useLocalStorage('moss-saved-niches', [])
     const [showSaveModal, setShowSaveModal] = useState(false)
 
-    const { generateNicheSuggestions, isLoading, error } = usePuterAI()
+    const { generateNicheSuggestions, isLoading, error } = useTransformersAI()
 
     const questions = quizData.questions
     const isComplete = currentQuestion >= questions.length

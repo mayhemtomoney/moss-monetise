@@ -5,7 +5,7 @@ import Button from '../components/ui/Button'
 import Badge from '../components/ui/Badge'
 import Modal from '../components/ui/Modal'
 import Toast from '../components/ui/Toast'
-import usePuterAI from '../hooks/usePuterAI'
+import useTransformersAI from '../hooks/useTransformersAI'
 import { useSavedPrompts } from '../hooks/useDexieStorage'
 import promptsData from '../data/prompts.json'
 
@@ -30,7 +30,7 @@ function PromptVaultPage() {
     // Dexie.js persistent storage
     const { savedPrompts, savePrompt: savePromptToDB, removePrompt, updatePrompt, isSaved, isLoading: isLoadingPrompts } = useSavedPrompts()
 
-    const { refinePrompt, isLoading } = usePuterAI()
+    const { refinePrompt, isLoading } = useTransformersAI()
 
     const categories = promptsData.categories
 
@@ -166,8 +166,8 @@ function PromptVaultPage() {
                 <button
                     onClick={() => setActiveTab('vault')}
                     className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'vault'
-                            ? 'bg-moss text-cream shadow-lg'
-                            : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                        ? 'bg-moss text-cream shadow-lg'
+                        : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
                         }`}
                 >
                     🔮 Vault
@@ -178,8 +178,8 @@ function PromptVaultPage() {
                 <button
                     onClick={() => setActiveTab('saved')}
                     className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'saved'
-                            ? 'bg-moss text-cream shadow-lg'
-                            : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                        ? 'bg-moss text-cream shadow-lg'
+                        : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
                         }`}
                 >
                     💚 Saved
