@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+/* Custom Tailwind Theme - Using CSS variables for Tailwind v4 */
+@theme {
+  --color-moss-deep: #6B7A3D;
+  --color-moss: #8B9A46;
+  --color-moss-light: #A8B86D;
+  --color-linen: #D2B48C;
+  --color-linen-light: #E8DCC8;
+  --color-cream: #FDF8F0;
+  --color-bark: #5D4E37;
+  --color-petal: #E8A4B0;
+  --color-berry: #8B4557;
+
+  --font-handwritten: 'Caveat', cursive;
+  --font-body: 'Inter', sans-serif;
+  --font-elegant: 'Playfair Display', serif;
+}
+
+:root {
+  /* Backgrounds */
+  --bg-primary: var(--color-cream);
+  --bg-secondary: var(--color-linen-light);
+  --text-primary: var(--color-bark);
+  --text-secondary: #7A6B5A;
+}
+
+.dark {
+  --bg-primary: #1A1F14;
+  --bg-secondary: #2A3020;
+  --text-primary: #E8DCC8;
+  --text-secondary: #A8B86D;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Parallax Ivy Background */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.ivy-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat;
+  opacity: 0.15;
+}
+
+.ivy-layer-1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 80 Q30 60 25 40 Q35 50 40 35 Q50 45 55 30 L50 35 Q55 50 65 40 Q60 55 70 50 Q65 70 75 80' fill='none' stroke='%238B9A46' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: 150px;
+  animation: parallax-scroll 30s linear infinite;
+}
+
+.ivy-layer-2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='30' rx='15' ry='20' fill='%236B7A3D' opacity='0.3'/%3E%3Cellipse cx='25' cy='50' rx='12' ry='16' fill='%238B9A46' opacity='0.3'/%3E%3Cellipse cx='55' cy='55' rx='10' ry='14' fill='%23A8B86D' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 200px;
+  animation: parallax-scroll 45s linear infinite reverse;
+}
+
+@keyframes parallax-scroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 500px;
+  }
+}
+
+/* Handwritten headings */
+h1,
+h2,
+h3 {
+  font-family: 'Caveat', cursive;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-moss);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-moss-deep);
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(253, 248, 240, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 154, 70, 0.2);
+  border-radius: 16px;
+}
+
+.dark .glass-card {
+  background: rgba(42, 48, 32, 0.8);
+  border-color: rgba(168, 184, 109, 0.2);
+}
+
+/* Linen texture overlay */
+.linen-texture {
+  position: relative;
+}
+
+.linen-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23D2B48C' opacity='0.03'/%3E%3Crect width='1' height='1' fill='%235D4E37' opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Button base styles - using plain CSS instead of @apply */
+.btn-moss {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s;
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-moss:hover {
+  background-color: var(--color-moss-deep);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-linen {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s;
+  background-color: var(--color-linen);
+  color: var(--color-bark);
+  border: 1px solid rgba(139, 154, 70, 0.2);
+}
+
+.btn-linen:hover {
+  background-color: var(--color-linen-light);
+}
+
+/* Floating animation for decorative elements */
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

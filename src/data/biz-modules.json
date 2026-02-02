@@ -1,0 +1,194 @@
+{
+    "modules": [
+        {
+            "id": "foundations",
+            "title": "Planting Seeds",
+            "subtitle": "Business Foundations",
+            "icon": "🌱",
+            "color": "moss",
+            "checklist": [
+                {
+                    "id": "f1",
+                    "task": "Define your cozy brand mission",
+                    "points": 10
+                },
+                {
+                    "id": "f2",
+                    "task": "Choose your business name",
+                    "points": 15
+                },
+                {
+                    "id": "f3",
+                    "task": "Set up your email address",
+                    "points": 10
+                },
+                {
+                    "id": "f4",
+                    "task": "Create a simple logo concept",
+                    "points": 20
+                },
+                {
+                    "id": "f5",
+                    "task": "Write your brand story (100 words)",
+                    "points": 25
+                }
+            ],
+            "badge": {
+                "name": "Seedling",
+                "emoji": "🌱"
+            }
+        },
+        {
+            "id": "products",
+            "title": "Growing Blooms",
+            "subtitle": "Product Creation",
+            "icon": "🌸",
+            "color": "petal",
+            "checklist": [
+                {
+                    "id": "p1",
+                    "task": "Brainstorm 5 product ideas",
+                    "points": 15
+                },
+                {
+                    "id": "p2",
+                    "task": "Create your first digital product",
+                    "points": 30
+                },
+                {
+                    "id": "p3",
+                    "task": "Write product description",
+                    "points": 15
+                },
+                {
+                    "id": "p4",
+                    "task": "Design product mockups",
+                    "points": 20
+                },
+                {
+                    "id": "p5",
+                    "task": "Price your products strategically",
+                    "points": 20
+                }
+            ],
+            "badge": {
+                "name": "Bloomer",
+                "emoji": "🌸"
+            }
+        },
+        {
+            "id": "platform",
+            "title": "Building the Cottage",
+            "subtitle": "Platform Setup",
+            "icon": "🏡",
+            "color": "linen",
+            "checklist": [
+                {
+                    "id": "pl1",
+                    "task": "Choose your selling platform",
+                    "points": 10
+                },
+                {
+                    "id": "pl2",
+                    "task": "Set up shop/storefront",
+                    "points": 25
+                },
+                {
+                    "id": "pl3",
+                    "task": "Upload your first product",
+                    "points": 20
+                },
+                {
+                    "id": "pl4",
+                    "task": "Configure payment processing",
+                    "points": 15
+                },
+                {
+                    "id": "pl5",
+                    "task": "Write shop policies",
+                    "points": 10
+                }
+            ],
+            "badge": {
+                "name": "Cottage Builder",
+                "emoji": "🏡"
+            }
+        },
+        {
+            "id": "marketing",
+            "title": "Gathering the Community",
+            "subtitle": "Marketing & Growth",
+            "icon": "🦋",
+            "color": "moss-light",
+            "checklist": [
+                {
+                    "id": "m1",
+                    "task": "Set up social media presence",
+                    "points": 15
+                },
+                {
+                    "id": "m2",
+                    "task": "Create 5 content posts",
+                    "points": 25
+                },
+                {
+                    "id": "m3",
+                    "task": "Start an email list",
+                    "points": 20
+                },
+                {
+                    "id": "m4",
+                    "task": "Plan a launch strategy",
+                    "points": 25
+                },
+                {
+                    "id": "m5",
+                    "task": "Connect with 3 potential collaborators",
+                    "points": 15
+                }
+            ],
+            "badge": {
+                "name": "Community Weaver",
+                "emoji": "🦋"
+            }
+        },
+        {
+            "id": "launch",
+            "title": "Harvest Season",
+            "subtitle": "Launch & Beyond",
+            "icon": "🌻",
+            "color": "berry",
+            "checklist": [
+                {
+                    "id": "l1",
+                    "task": "Announce your launch date",
+                    "points": 15
+                },
+                {
+                    "id": "l2",
+                    "task": "Create launch content",
+                    "points": 25
+                },
+                {
+                    "id": "l3",
+                    "task": "Make your first sale",
+                    "points": 50
+                },
+                {
+                    "id": "l4",
+                    "task": "Collect your first testimonial",
+                    "points": 30
+                },
+                {
+                    "id": "l5",
+                    "task": "Plan your next product",
+                    "points": 20
+                }
+            ],
+            "badge": {
+                "name": "Harvest Queen",
+                "emoji": "🌻"
+            }
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "templates": [
+        {
+            "id": "planner",
+            "name": "Digital Planner",
+            "icon": "📓",
+            "description": "Cozy daily/weekly/monthly planners",
+            "fields": [
+                "title",
+                "pages",
+                "features"
+            ],
+            "aiPrompt": "Create content for a cottagecore digital planner"
+        },
+        {
+            "id": "journal",
+            "name": "Guided Journal",
+            "icon": "✨",
+            "description": "Reflective journals with prompts",
+            "fields": [
+                "theme",
+                "prompts",
+                "pages"
+            ],
+            "aiPrompt": "Create prompts for a cozy guided journal"
+        },
+        {
+            "id": "ebook",
+            "name": "Mini eBook",
+            "icon": "📖",
+            "description": "Short guides and how-tos",
+            "fields": [
+                "topic",
+                "chapters",
+                "audience"
+            ],
+            "aiPrompt": "Outline a cottagecore mini ebook"
+        },
+        {
+            "id": "printable",
+            "name": "Printable Bundle",
+            "icon": "🖨️",
+            "description": "Wall art, checklists, trackers",
+            "fields": [
+                "type",
+                "quantity",
+                "theme"
+            ],
+            "aiPrompt": "Design concepts for a cottagecore printable bundle"
+        },
+        {
+            "id": "template",
+            "name": "Canva Templates",
+            "icon": "🎨",
+            "description": "Social media & branding templates",
+            "fields": [
+                "platform",
+                "quantity",
+                "style"
+            ],
+            "aiPrompt": "Create descriptions for Canva template packs"
+        },
+        {
+            "id": "course",
+            "name": "Mini Course",
+            "icon": "🎓",
+            "description": "Short educational courses",
+            "fields": [
+                "topic",
+                "modules",
+                "outcome"
+            ],
+            "aiPrompt": "Outline a cozy mini course curriculum"
+        }
+    ]
+}

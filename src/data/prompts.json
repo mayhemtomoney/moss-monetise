@@ -1,0 +1,974 @@
+{
+    "categories": [
+        {
+            "id": "content",
+            "name": "Content Creation",
+            "icon": "✍️",
+            "prompts": [
+                {
+                    "id": "c1",
+                    "title": "Blog Post Outline",
+                    "prompt": "Write a cozy blog post outline about [topic] for [audience]. Include an engaging hook, 5 main points with cottagecore metaphors, and a gentle call-to-action.",
+                    "tags": [
+                        "blog",
+                        "writing"
+                    ]
+                },
+                {
+                    "id": "c2",
+                    "title": "Instagram Caption",
+                    "prompt": "Write a warm, inviting Instagram caption for [image description]. Include storytelling elements, 3 relevant hashtags, and end with a question to encourage engagement.",
+                    "tags": [
+                        "social",
+                        "instagram"
+                    ]
+                },
+                {
+                    "id": "c3",
+                    "title": "Pinterest Pin Description",
+                    "prompt": "Create an SEO-optimized Pinterest pin description for [product/content]. Include relevant keywords naturally, highlight benefits, and create urgency without being pushy.",
+                    "tags": [
+                        "pinterest",
+                        "seo"
+                    ]
+                },
+                {
+                    "id": "c4",
+                    "title": "Email Newsletter",
+                    "prompt": "Write a cozy email newsletter about [topic]. Start with a personal story, share valuable tips, and end with a soft product mention. Keep it under 300 words.",
+                    "tags": [
+                        "email",
+                        "newsletter"
+                    ]
+                },
+                {
+                    "id": "c5",
+                    "title": "YouTube Script Intro",
+                    "prompt": "Write a warm, engaging YouTube video intro for a tutorial about [topic]. Hook viewers in the first 10 seconds and preview what they'll learn.",
+                    "tags": [
+                        "video",
+                        "youtube"
+                    ]
+                },
+                {
+                    "id": "c6",
+                    "title": "TikTok Hook Ideas",
+                    "prompt": "Generate 5 scroll-stopping TikTok hooks for content about [topic]. Each should be under 10 words and create curiosity.",
+                    "tags": [
+                        "tiktok",
+                        "hooks"
+                    ]
+                },
+                {
+                    "id": "c7",
+                    "title": "Carousel Slide Copy",
+                    "prompt": "Write copy for a 7-slide Instagram carousel teaching [topic]. Each slide should have a headline and 1-2 supporting sentences.",
+                    "tags": [
+                        "carousel",
+                        "educational"
+                    ]
+                },
+                {
+                    "id": "c8",
+                    "title": "Story Sequence",
+                    "prompt": "Create a 5-story Instagram sequence that builds anticipation for [product launch/announcement]. Include polls and questions.",
+                    "tags": [
+                        "stories",
+                        "launch"
+                    ]
+                },
+                {
+                    "id": "c9",
+                    "title": "Thread Starter",
+                    "prompt": "Write a Twitter/X thread starter about [topic] that makes people want to read all 10 tweets. First tweet should be a bold statement or question.",
+                    "tags": [
+                        "twitter",
+                        "thread"
+                    ]
+                },
+                {
+                    "id": "c10",
+                    "title": "Live Stream Outline",
+                    "prompt": "Create a 30-minute live stream outline for teaching [topic]. Include intro, 3 main sections, Q&A time, and a closing offer.",
+                    "tags": [
+                        "live",
+                        "teaching"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "products",
+            "name": "Product Creation",
+            "icon": "🎨",
+            "prompts": [
+                {
+                    "id": "p1",
+                    "title": "Digital Planner Pages",
+                    "prompt": "Design descriptions for 10 pages in a [theme] digital planner. Include daily, weekly, monthly spreads, goal trackers, and reflection pages.",
+                    "tags": [
+                        "planner",
+                        "digital"
+                    ]
+                },
+                {
+                    "id": "p2",
+                    "title": "Journal Prompts Set",
+                    "prompt": "Create 30 reflective journal prompts for [audience/theme]. Make them thought-provoking but gentle, perfect for cozy morning journaling.",
+                    "tags": [
+                        "journal",
+                        "prompts"
+                    ]
+                },
+                {
+                    "id": "p3",
+                    "title": "eBook Outline",
+                    "prompt": "Outline a mini eBook about [topic] for [audience]. Include 5 chapters, key takeaways for each, and a downloadable bonus idea.",
+                    "tags": [
+                        "ebook",
+                        "outline"
+                    ]
+                },
+                {
+                    "id": "p4",
+                    "title": "Printable Bundle Ideas",
+                    "prompt": "Brainstorm 10 printable items for a [theme] bundle. Include wall art, checklists, trackers, and organizational tools.",
+                    "tags": [
+                        "printables",
+                        "bundle"
+                    ]
+                },
+                {
+                    "id": "p5",
+                    "title": "Template Pack Concepts",
+                    "prompt": "Describe 15 Canva templates for a [niche] Instagram template pack. Include feed posts, stories, reels covers, and highlights.",
+                    "tags": [
+                        "canva",
+                        "templates"
+                    ]
+                },
+                {
+                    "id": "p6",
+                    "title": "Course Module Outline",
+                    "prompt": "Create a 5-module mini course outline teaching [skill]. Each module should have 3 lessons with clear outcomes.",
+                    "tags": [
+                        "course",
+                        "teaching"
+                    ]
+                },
+                {
+                    "id": "p7",
+                    "title": "Workbook Structure",
+                    "prompt": "Design the structure for a [topic] workbook. Include exercises, reflection questions, action steps, and celebration milestones.",
+                    "tags": [
+                        "workbook",
+                        "interactive"
+                    ]
+                },
+                {
+                    "id": "p8",
+                    "title": "Notion Template Design",
+                    "prompt": "Describe a comprehensive Notion template for [purpose]. Include databases, views, automations, and aesthetic customizations.",
+                    "tags": [
+                        "notion",
+                        "template"
+                    ]
+                },
+                {
+                    "id": "p9",
+                    "title": "Membership Content Calendar",
+                    "prompt": "Create a 3-month content calendar for a [niche] membership. Include weekly content types, monthly themes, and bonus surprises.",
+                    "tags": [
+                        "membership",
+                        "planning"
+                    ]
+                },
+                {
+                    "id": "p10",
+                    "title": "Bundle Upsell Strategy",
+                    "prompt": "Design an upsell bundle for [main product]. Include 3 complementary products and write compelling bundle copy.",
+                    "tags": [
+                        "bundle",
+                        "upsell"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "marketing",
+            "name": "Marketing & Sales",
+            "icon": "📣",
+            "prompts": [
+                {
+                    "id": "m1",
+                    "title": "Product Description",
+                    "prompt": "Write a cozy, compelling product description for [product]. Highlight benefits over features, use sensory language, and create gentle urgency.",
+                    "tags": [
+                        "sales",
+                        "copy"
+                    ]
+                },
+                {
+                    "id": "m2",
+                    "title": "Launch Email Sequence",
+                    "prompt": "Outline a 5-email launch sequence for [product]. Include teaser, value email, offer email, FAQ/objections, and last chance.",
+                    "tags": [
+                        "email",
+                        "launch"
+                    ]
+                },
+                {
+                    "id": "m3",
+                    "title": "Sales Page Sections",
+                    "prompt": "Write the key sections for a [product] sales page: headline, problem, solution, features, testimonial prompts, and CTA.",
+                    "tags": [
+                        "sales",
+                        "page"
+                    ]
+                },
+                {
+                    "id": "m4",
+                    "title": "Testimonial Request",
+                    "prompt": "Write a friendly email requesting a testimonial from a customer of [product]. Include specific questions to guide their response.",
+                    "tags": [
+                        "testimonial",
+                        "email"
+                    ]
+                },
+                {
+                    "id": "m5",
+                    "title": "Collaboration Pitch",
+                    "prompt": "Write an outreach email for collaborating with [type of creator/brand]. Be genuine, highlight mutual benefits, and propose specific ideas.",
+                    "tags": [
+                        "collab",
+                        "outreach"
+                    ]
+                },
+                {
+                    "id": "m6",
+                    "title": "Freebie Opt-in Copy",
+                    "prompt": "Write opt-in page copy for a free [type of freebie] about [topic]. Include headline, 3 bullet benefits, and simple form copy.",
+                    "tags": [
+                        "freebie",
+                        "optin"
+                    ]
+                },
+                {
+                    "id": "m7",
+                    "title": "Black Friday Promo",
+                    "prompt": "Create Black Friday promotional copy for [product/bundle]. Include email subject lines, social captions, and urgency elements.",
+                    "tags": [
+                        "promo",
+                        "holiday"
+                    ]
+                },
+                {
+                    "id": "m8",
+                    "title": "Affiliate Program Description",
+                    "prompt": "Write the description for an affiliate program for [product]. Include benefits, commission structure, and promotional asset ideas.",
+                    "tags": [
+                        "affiliate",
+                        "program"
+                    ]
+                },
+                {
+                    "id": "m9",
+                    "title": "Webinar Promotion",
+                    "prompt": "Create promotional content for a free webinar about [topic]. Include registration page copy, reminder emails, and social posts.",
+                    "tags": [
+                        "webinar",
+                        "promo"
+                    ]
+                },
+                {
+                    "id": "m10",
+                    "title": "Customer Win-Back Email",
+                    "prompt": "Write a warm win-back email for customers who haven't purchased in 90 days. Include a special offer and gentle reminder of value.",
+                    "tags": [
+                        "email",
+                        "retention"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "branding",
+            "name": "Branding & Identity",
+            "icon": "🌿",
+            "prompts": [
+                {
+                    "id": "b1",
+                    "title": "Brand Story",
+                    "prompt": "Write a compelling brand story for [business name] that connects with [target audience]. Include the journey, mission, and values.",
+                    "tags": [
+                        "story",
+                        "about"
+                    ]
+                },
+                {
+                    "id": "b2",
+                    "title": "Brand Voice Guide",
+                    "prompt": "Define the brand voice for [business]. Include tone descriptors, words to use/avoid, and example sentences.",
+                    "tags": [
+                        "voice",
+                        "guide"
+                    ]
+                },
+                {
+                    "id": "b3",
+                    "title": "Color Palette Meaning",
+                    "prompt": "Explain the meaning and emotion behind a color palette of [colors] for a [niche] brand. Include usage guidelines.",
+                    "tags": [
+                        "colors",
+                        "meaning"
+                    ]
+                },
+                {
+                    "id": "b4",
+                    "title": "Tagline Options",
+                    "prompt": "Generate 10 tagline options for [business name/description]. Each should be memorable, under 8 words, and capture the brand essence.",
+                    "tags": [
+                        "tagline",
+                        "slogan"
+                    ]
+                },
+                {
+                    "id": "b5",
+                    "title": "Bio Templates",
+                    "prompt": "Write 5 different bio versions for [business/creator]: Twitter (160 chars), Instagram, LinkedIn, Pinterest, and website.",
+                    "tags": [
+                        "bio",
+                        "social"
+                    ]
+                },
+                {
+                    "id": "b6",
+                    "title": "Mission Statement",
+                    "prompt": "Craft a mission statement for [business] that inspires both the team and customers. Keep it under 50 words.",
+                    "tags": [
+                        "mission",
+                        "purpose"
+                    ]
+                },
+                {
+                    "id": "b7",
+                    "title": "About Page Copy",
+                    "prompt": "Write the About page copy for [business website]. Include the founder story, values, and what makes the brand unique.",
+                    "tags": [
+                        "about",
+                        "website"
+                    ]
+                },
+                {
+                    "id": "b8",
+                    "title": "Brand Mood Board Description",
+                    "prompt": "Describe the visual elements for a [aesthetic] mood board. Include textures, imagery, typography, and color descriptions.",
+                    "tags": [
+                        "moodboard",
+                        "visual"
+                    ]
+                },
+                {
+                    "id": "b9",
+                    "title": "Customer Persona",
+                    "prompt": "Create a detailed customer persona for [product/business]. Include demographics, pain points, desires, and where they hang out online.",
+                    "tags": [
+                        "persona",
+                        "audience"
+                    ]
+                },
+                {
+                    "id": "b10",
+                    "title": "Brand Differentiator",
+                    "prompt": "Identify and articulate 5 unique differentiators for [business] compared to competitors in the [niche] space.",
+                    "tags": [
+                        "positioning",
+                        "unique"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ai",
+            "name": "AI & Automation",
+            "icon": "🤖",
+            "prompts": [
+                {
+                    "id": "a1",
+                    "title": "ChatGPT Custom Instructions",
+                    "prompt": "Write custom instructions for ChatGPT to act as a [role] helping with [tasks]. Include personality, expertise, and response style.",
+                    "tags": [
+                        "chatgpt",
+                        "setup"
+                    ]
+                },
+                {
+                    "id": "a2",
+                    "title": "Midjourney Prompt",
+                    "prompt": "Create a Midjourney prompt for a [style] image of [subject]. Include style references, lighting, mood, and aspect ratio.",
+                    "tags": [
+                        "midjourney",
+                        "image"
+                    ]
+                },
+                {
+                    "id": "a3",
+                    "title": "Content Repurposing Plan",
+                    "prompt": "Create a plan to repurpose a [type of content] into 10 different content pieces across multiple platforms using AI tools.",
+                    "tags": [
+                        "repurpose",
+                        "workflow"
+                    ]
+                },
+                {
+                    "id": "a4",
+                    "title": "AI Workflow Automation",
+                    "prompt": "Design an AI-powered workflow for [task]. Include tools, triggers, and step-by-step automation sequence.",
+                    "tags": [
+                        "automation",
+                        "workflow"
+                    ]
+                },
+                {
+                    "id": "a5",
+                    "title": "Prompt Template Library",
+                    "prompt": "Create 5 reusable prompt templates for [use case] that can be customized with variables for different situations.",
+                    "tags": [
+                        "templates",
+                        "prompts"
+                    ]
+                },
+                {
+                    "id": "a6",
+                    "title": "AI Content Brief",
+                    "prompt": "Write a comprehensive content brief for AI to generate [type of content]. Include context, tone, structure, and examples.",
+                    "tags": [
+                        "brief",
+                        "instructions"
+                    ]
+                },
+                {
+                    "id": "a7",
+                    "title": "Batch Content Generation",
+                    "prompt": "Design a batch prompt to generate [number] [type of content] at once. Include variation parameters and quality checks.",
+                    "tags": [
+                        "batch",
+                        "efficiency"
+                    ]
+                },
+                {
+                    "id": "a8",
+                    "title": "AI Research Assistant",
+                    "prompt": "Create a prompt that turns AI into a research assistant for [topic]. Include research questions, source evaluation, and summary format.",
+                    "tags": [
+                        "research",
+                        "assistant"
+                    ]
+                },
+                {
+                    "id": "a9",
+                    "title": "Voice Clone Script",
+                    "prompt": "Write a script that captures [person/brand] voice for AI to replicate. Include speech patterns, vocabulary, and example phrases.",
+                    "tags": [
+                        "voice",
+                        "clone"
+                    ]
+                },
+                {
+                    "id": "a10",
+                    "title": "AI Quality Checklist",
+                    "prompt": "Create a checklist for reviewing and improving AI-generated content for [use case]. Include accuracy, tone, and brand alignment.",
+                    "tags": [
+                        "quality",
+                        "review"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "business",
+            "name": "Business Strategy",
+            "icon": "📈",
+            "prompts": [
+                {
+                    "id": "bs1",
+                    "title": "90-Day Goal Setting",
+                    "prompt": "Create a 90-day goal framework for [business goal]. Include milestones, weekly actions, and success metrics.",
+                    "tags": [
+                        "goals",
+                        "planning"
+                    ]
+                },
+                {
+                    "id": "bs2",
+                    "title": "Pricing Strategy",
+                    "prompt": "Develop a pricing strategy for [product/service]. Include value-based pricing rationale, tiers, and comparison positioning.",
+                    "tags": [
+                        "pricing",
+                        "strategy"
+                    ]
+                },
+                {
+                    "id": "bs3",
+                    "title": "Passive Income Ideas",
+                    "prompt": "Brainstorm 10 passive income product ideas for a [niche] creator with [skills]. Include effort level and income potential.",
+                    "tags": [
+                        "passive",
+                        "ideas"
+                    ]
+                },
+                {
+                    "id": "bs4",
+                    "title": "Revenue Diversification",
+                    "prompt": "Create a revenue diversification plan for [business]. Include 5 income streams with implementation timeline.",
+                    "tags": [
+                        "revenue",
+                        "diversify"
+                    ]
+                },
+                {
+                    "id": "bs5",
+                    "title": "Time Audit Template",
+                    "prompt": "Design a time audit framework for a [type of] business owner. Include categories, efficiency scores, and optimization suggestions.",
+                    "tags": [
+                        "time",
+                        "productivity"
+                    ]
+                },
+                {
+                    "id": "bs6",
+                    "title": "Outsourcing Roadmap",
+                    "prompt": "Create an outsourcing roadmap for [business]. Identify tasks to delegate, hiring timeline, and team structure.",
+                    "tags": [
+                        "outsource",
+                        "delegate"
+                    ]
+                },
+                {
+                    "id": "bs7",
+                    "title": "Quarterly Review Template",
+                    "prompt": "Design a quarterly business review template covering goals, revenue, wins, lessons, and next quarter priorities.",
+                    "tags": [
+                        "review",
+                        "planning"
+                    ]
+                },
+                {
+                    "id": "bs8",
+                    "title": "Competitor Analysis",
+                    "prompt": "Create a competitor analysis framework for [business/niche]. Include what to research, how to position differently, and opportunities.",
+                    "tags": [
+                        "competitor",
+                        "analysis"
+                    ]
+                },
+                {
+                    "id": "bs9",
+                    "title": "Launch Checklist",
+                    "prompt": "Create a comprehensive launch checklist for [product type]. Include pre-launch, launch day, and post-launch phases.",
+                    "tags": [
+                        "launch",
+                        "checklist"
+                    ]
+                },
+                {
+                    "id": "bs10",
+                    "title": "Customer Journey Map",
+                    "prompt": "Map the customer journey for [product/service] from awareness to advocacy. Include touchpoints and optimization opportunities.",
+                    "tags": [
+                        "journey",
+                        "customer"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "mindset",
+            "name": "Mindset & Wellness",
+            "icon": "🧘",
+            "prompts": [
+                {
+                    "id": "w1",
+                    "title": "Morning Affirmations",
+                    "prompt": "Write 10 empowering morning affirmations for [type of person] building [type of business]. Make them specific and actionable.",
+                    "tags": [
+                        "affirmations",
+                        "morning"
+                    ]
+                },
+                {
+                    "id": "w2",
+                    "title": "Imposter Syndrome Script",
+                    "prompt": "Write a self-coaching script for overcoming imposter syndrome as a [profession/creator]. Include reframes and evidence gathering.",
+                    "tags": [
+                        "imposter",
+                        "mindset"
+                    ]
+                },
+                {
+                    "id": "w3",
+                    "title": "Boundaries Template",
+                    "prompt": "Create scripts for setting business boundaries around [situation]. Include professional but firm language.",
+                    "tags": [
+                        "boundaries",
+                        "scripts"
+                    ]
+                },
+                {
+                    "id": "w4",
+                    "title": "Energy Management Plan",
+                    "prompt": "Design an energy management plan for a [type of] entrepreneur. Include high/low energy task allocation and recovery strategies.",
+                    "tags": [
+                        "energy",
+                        "adhd"
+                    ]
+                },
+                {
+                    "id": "w5",
+                    "title": "Rejection Reframe",
+                    "prompt": "Write 5 reframes for common business rejections [examples]. Turn each rejection into a growth opportunity perspective.",
+                    "tags": [
+                        "rejection",
+                        "reframe"
+                    ]
+                },
+                {
+                    "id": "w6",
+                    "title": "Celebration Ritual",
+                    "prompt": "Design a celebration ritual for [type of wins]. Include small, medium, and big win celebrations that feel meaningful.",
+                    "tags": [
+                        "celebration",
+                        "wins"
+                    ]
+                },
+                {
+                    "id": "w7",
+                    "title": "Decision Framework",
+                    "prompt": "Create a decision-making framework for [type of business decisions]. Include values alignment, pros/cons, and gut-check questions.",
+                    "tags": [
+                        "decisions",
+                        "framework"
+                    ]
+                },
+                {
+                    "id": "w8",
+                    "title": "Burnout Prevention Plan",
+                    "prompt": "Design a burnout prevention plan for a solo [type of] business owner. Include warning signs, boundaries, and recovery protocols.",
+                    "tags": [
+                        "burnout",
+                        "prevention"
+                    ]
+                },
+                {
+                    "id": "w9",
+                    "title": "Fear Inventory",
+                    "prompt": "Create a fear inventory exercise for [business fear]. Include identifying, questioning, and action planning for each fear.",
+                    "tags": [
+                        "fear",
+                        "exercise"
+                    ]
+                },
+                {
+                    "id": "w10",
+                    "title": "Values Alignment Check",
+                    "prompt": "Design a quarterly values alignment check for [business type]. Include reflection questions and realignment actions.",
+                    "tags": [
+                        "values",
+                        "alignment"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cottagecore",
+            "name": "Cottagecore Specific",
+            "icon": "🏡",
+            "prompts": [
+                {
+                    "id": "cc1",
+                    "title": "Seasonal Content Theme",
+                    "prompt": "Create a seasonal content theme for [season] that incorporates cottagecore aesthetics. Include post ideas, colors, and imagery suggestions.",
+                    "tags": [
+                        "seasonal",
+                        "theme"
+                    ]
+                },
+                {
+                    "id": "cc2",
+                    "title": "Cozy Product Naming",
+                    "prompt": "Generate 10 cozy, cottagecore-inspired names for a [type of product]. Each name should evoke warmth, nature, and whimsy.",
+                    "tags": [
+                        "naming",
+                        "products"
+                    ]
+                },
+                {
+                    "id": "cc3",
+                    "title": "Nature Metaphor Copy",
+                    "prompt": "Rewrite [business concept] using nature and garden metaphors that resonate with cottagecore audience. Make it poetic but clear.",
+                    "tags": [
+                        "metaphor",
+                        "copy"
+                    ]
+                },
+                {
+                    "id": "cc4",
+                    "title": "Slow Living Content",
+                    "prompt": "Create 10 content ideas around slow living and cottagecore lifestyle that subtly promote [product/service].",
+                    "tags": [
+                        "slow living",
+                        "content"
+                    ]
+                },
+                {
+                    "id": "cc5",
+                    "title": "Aesthetic Mood Words",
+                    "prompt": "Generate 30 mood words and phrases for [cottagecore sub-aesthetic] that can be used in marketing and branding.",
+                    "tags": [
+                        "aesthetic",
+                        "words"
+                    ]
+                },
+                {
+                    "id": "cc6",
+                    "title": "Cozy Email Sign-offs",
+                    "prompt": "Create 15 warm, cottagecore-inspired email sign-offs appropriate for [type of email]. Avoid being too casual for business.",
+                    "tags": [
+                        "email",
+                        "sign-off"
+                    ]
+                },
+                {
+                    "id": "cc7",
+                    "title": "Garden Analogy Framework",
+                    "prompt": "Create a garden analogy framework for explaining [business concept] to a cottagecore audience. Make it educational and enchanting.",
+                    "tags": [
+                        "analogy",
+                        "teaching"
+                    ]
+                },
+                {
+                    "id": "cc8",
+                    "title": "Seasonal Collection Names",
+                    "prompt": "Name a 4-part seasonal collection of [products] with cottagecore-inspired names. Include brief description of each season's vibe.",
+                    "tags": [
+                        "collection",
+                        "seasonal"
+                    ]
+                },
+                {
+                    "id": "cc9",
+                    "title": "Cozy Unboxing Experience",
+                    "prompt": "Design the unboxing/welcome experience for [digital product] with cottagecore touches. Include welcome message, surprises, and presentation.",
+                    "tags": [
+                        "unboxing",
+                        "experience"
+                    ]
+                },
+                {
+                    "id": "cc10",
+                    "title": "Whimsical FAQ",
+                    "prompt": "Rewrite standard FAQ answers for [product/service] in a warm, whimsical cottagecore voice without losing clarity.",
+                    "tags": [
+                        "faq",
+                        "voice"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "adhd",
+            "name": "ADHD-Friendly",
+            "icon": "🧠",
+            "prompts": [
+                {
+                    "id": "ad1",
+                    "title": "Task Breakdown",
+                    "prompt": "Break down [overwhelming task] into tiny, dopamine-friendly steps. Each step should take under 10 minutes.",
+                    "tags": [
+                        "breakdown",
+                        "tasks"
+                    ]
+                },
+                {
+                    "id": "ad2",
+                    "title": "Focus Session Plan",
+                    "prompt": "Create a focus session plan for [task] using body doubling principles. Include warm-up, main work, and reward.",
+                    "tags": [
+                        "focus",
+                        "session"
+                    ]
+                },
+                {
+                    "id": "ad3",
+                    "title": "Hyperfocus Project",
+                    "prompt": "Design a [project] that channels hyperfocus productively. Include guardrails to prevent burnout and exit points.",
+                    "tags": [
+                        "hyperfocus",
+                        "project"
+                    ]
+                },
+                {
+                    "id": "ad4",
+                    "title": "Routine Anchor",
+                    "prompt": "Create an anchor routine for [time of day] that helps transition into [work type]. Include sensory and movement elements.",
+                    "tags": [
+                        "routine",
+                        "anchor"
+                    ]
+                },
+                {
+                    "id": "ad5",
+                    "title": "Rejection Sensitive Script",
+                    "prompt": "Write a self-compassion script for when [type of rejection] triggers RSD. Include grounding and perspective-taking.",
+                    "tags": [
+                        "rsd",
+                        "script"
+                    ]
+                },
+                {
+                    "id": "ad6",
+                    "title": "Novelty Refresh",
+                    "prompt": "Suggest 10 ways to add novelty and excitement to a [routine task/business area] that's become boring. Quick, low-effort ideas.",
+                    "tags": [
+                        "novelty",
+                        "refresh"
+                    ]
+                },
+                {
+                    "id": "ad7",
+                    "title": "Quick Win List",
+                    "prompt": "Create a list of 15 quick wins for [business type] that can be done in under 5 minutes for instant dopamine.",
+                    "tags": [
+                        "quick wins",
+                        "dopamine"
+                    ]
+                },
+                {
+                    "id": "ad8",
+                    "title": "Overwhelm Reset",
+                    "prompt": "Design a 15-minute overwhelm reset protocol for when [situation]. Include physical, mental, and task-clearing steps.",
+                    "tags": [
+                        "overwhelm",
+                        "reset"
+                    ]
+                },
+                {
+                    "id": "ad9",
+                    "title": "Interest-Based Nervous System",
+                    "prompt": "Reframe [boring task] to activate the interest-based nervous system. Find challenge, novelty, urgency, or passion angles.",
+                    "tags": [
+                        "motivation",
+                        "reframe"
+                    ]
+                },
+                {
+                    "id": "ad10",
+                    "title": "Accountability Structure",
+                    "prompt": "Design an accountability structure for [goal] that works with ADHD tendencies. Include external, visual, and immediate components.",
+                    "tags": [
+                        "accountability",
+                        "structure"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "customer",
+            "name": "Customer Experience",
+            "icon": "💝",
+            "prompts": [
+                {
+                    "id": "cx1",
+                    "title": "Welcome Sequence",
+                    "prompt": "Write a 3-email welcome sequence for new [product] customers. Balance value delivery with subtle upsell opportunities.",
+                    "tags": [
+                        "welcome",
+                        "onboard"
+                    ]
+                },
+                {
+                    "id": "cx2",
+                    "title": "Thank You Message",
+                    "prompt": "Write 5 heartfelt thank you message variations for [purchase type]. Make each feel personal and genuine.",
+                    "tags": [
+                        "thanks",
+                        "personal"
+                    ]
+                },
+                {
+                    "id": "cx3",
+                    "title": "Check-In Email",
+                    "prompt": "Write a customer check-in email sent [timeframe] after purchase of [product]. Focus on support, not selling.",
+                    "tags": [
+                        "check-in",
+                        "support"
+                    ]
+                },
+                {
+                    "id": "cx4",
+                    "title": "Refund Response",
+                    "prompt": "Write a gracious refund response email for [product] that leaves the door open for future relationship.",
+                    "tags": [
+                        "refund",
+                        "grace"
+                    ]
+                },
+                {
+                    "id": "cx5",
+                    "title": "VIP Treatment Ideas",
+                    "prompt": "Brainstorm 10 ways to make repeat customers of [business] feel like VIPs. Mix digital and personal touches.",
+                    "tags": [
+                        "vip",
+                        "loyalty"
+                    ]
+                },
+                {
+                    "id": "cx6",
+                    "title": "Surprise & Delight",
+                    "prompt": "Create 5 surprise and delight moments to add to the [product/service] experience. Low-cost, high-impact ideas.",
+                    "tags": [
+                        "surprise",
+                        "delight"
+                    ]
+                },
+                {
+                    "id": "cx7",
+                    "title": "Complaint Response",
+                    "prompt": "Write a template for responding to [type of complaint] that turns frustration into loyalty. Include empathy and action steps.",
+                    "tags": [
+                        "complaint",
+                        "response"
+                    ]
+                },
+                {
+                    "id": "cx8",
+                    "title": "Milestone Celebration",
+                    "prompt": "Design customer milestone celebrations for [business]. Include 30-day, 90-day, 1-year, and achievement-based milestones.",
+                    "tags": [
+                        "milestone",
+                        "celebrate"
+                    ]
+                },
+                {
+                    "id": "cx9",
+                    "title": "Community Guidelines",
+                    "prompt": "Write warm but clear community guidelines for a [type of community]. Set boundaries while maintaining the cozy vibe.",
+                    "tags": [
+                        "community",
+                        "guidelines"
+                    ]
+                },
+                {
+                    "id": "cx10",
+                    "title": "Exit Survey",
+                    "prompt": "Create a kind exit survey for customers leaving [membership/subscription]. Learn while leaving a positive impression.",
+                    "tags": [
+                        "exit",
+                        "feedback"
+                    ]
+                }
+            ]
+        }
+    ]
+}

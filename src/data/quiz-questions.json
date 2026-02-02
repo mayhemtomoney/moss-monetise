@@ -1,0 +1,134 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "What makes your heart sing on a cozy afternoon?",
+            "options": [
+                {
+                    "value": "crafting",
+                    "label": "🧵 Creating handmade treasures",
+                    "vibe": "maker"
+                },
+                {
+                    "value": "writing",
+                    "label": "✍️ Writing stories or guides",
+                    "vibe": "wordsmith"
+                },
+                {
+                    "value": "organizing",
+                    "label": "📋 Organizing & planning",
+                    "vibe": "curator"
+                },
+                {
+                    "value": "teaching",
+                    "label": "🌱 Helping others learn",
+                    "vibe": "mentor"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "question": "Which skill do you secretly excel at?",
+            "options": [
+                {
+                    "value": "design",
+                    "label": "🎨 Visual design & aesthetics",
+                    "skill": "creative"
+                },
+                {
+                    "value": "research",
+                    "label": "🔍 Deep research & curation",
+                    "skill": "analytical"
+                },
+                {
+                    "value": "connection",
+                    "label": "💬 Connecting with people",
+                    "skill": "relational"
+                },
+                {
+                    "value": "systems",
+                    "label": "⚙️ Building systems & processes",
+                    "skill": "systematic"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "question": "How much time can you realistically dedicate weekly?",
+            "options": [
+                {
+                    "value": "minimal",
+                    "label": "🌙 1-3 hours (Night owl mode)",
+                    "time": "low"
+                },
+                {
+                    "value": "moderate",
+                    "label": "☀️ 4-8 hours (Steady bloom)",
+                    "time": "medium"
+                },
+                {
+                    "value": "dedicated",
+                    "label": "🌻 8-15 hours (Garden full)",
+                    "time": "high"
+                },
+                {
+                    "value": "fulltime",
+                    "label": "🏡 15+ hours (Cottage life)",
+                    "time": "full"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "question": "Who would you love to help with your creations?",
+            "options": [
+                {
+                    "value": "newmums",
+                    "label": "👶 New mums seeking calm",
+                    "audience": "nurturing"
+                },
+                {
+                    "value": "creatives",
+                    "label": "🎨 Fellow creative souls",
+                    "audience": "artistic"
+                },
+                {
+                    "value": "entrepreneurs",
+                    "label": "💼 Small business dreamers",
+                    "audience": "business"
+                },
+                {
+                    "value": "seekers",
+                    "label": "✨ Wellness & mindfulness seekers",
+                    "audience": "spiritual"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "question": "Which aesthetic speaks to your soul?",
+            "options": [
+                {
+                    "value": "rustic",
+                    "label": "🪵 Rustic farmhouse warmth",
+                    "aesthetic": "rustic"
+                },
+                {
+                    "value": "botanical",
+                    "label": "🌿 Botanical & nature-inspired",
+                    "aesthetic": "botanical"
+                },
+                {
+                    "value": "vintage",
+                    "label": "📜 Vintage & nostalgic charm",
+                    "aesthetic": "vintage"
+                },
+                {
+                    "value": "whimsical",
+                    "label": "🧚 Whimsical & fairy-tale magic",
+                    "aesthetic": "whimsical"
+                }
+            ]
+        }
+    ]
+}
