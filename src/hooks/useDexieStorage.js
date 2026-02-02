@@ -64,11 +64,24 @@ export function useSavedPrompts() {
         return savedPrompts.some(p => p.originalId === promptId || p.id === promptId)
     }, [savedPrompts])
 
+    const updatePrompt = useCallback(async (id, changes) => {
+        try {
+            await promptsDB.update(id, changes)
+            setSavedPrompts(prev => prev.map(p =>
+                p.id === id ? { ...p, ...changes, timestamp: Date.now() } : p
+            ))
+        } catch (err) {
+            console.error('Failed to update prompt:', err)
+            throw err
+        }
+    }, [])
+
     return {
         savedPrompts,
         isLoading,
         savePrompt,
         removePrompt,
+        updatePrompt,
         searchPrompts,
         isSaved
     }
