@@ -4,29 +4,19 @@ function Card({
     children,
     className = '',
     hover = true,
-    variant = 'parchment',
     onClick,
     ...props
 }) {
-    const variants = {
-        parchment: 'parchment-card',
-        glass: 'glass-card',
-        wood: 'bg-wood border-2 border-wood-light rounded-lg'
-    }
-
     return (
         <motion.div
-            className={`
-        ${variants[variant] || variants.parchment} p-6
-        ${hover ? 'hover:shadow-lg hover:-translate-y-1 cursor-pointer' : ''}
-        transition-all duration-300
-        ${className}
-      `}
+            className={`card bg-base-100 shadow-md ${hover ? 'hover:shadow-xl cursor-pointer' : ''} ${className}`}
             onClick={onClick}
             whileHover={hover ? { scale: 1.01 } : {}}
             {...props}
         >
-            {children}
+            <div className="card-body">
+                {children}
+            </div>
         </motion.div>
     )
 }

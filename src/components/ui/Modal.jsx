@@ -7,7 +7,7 @@ function Modal({ isOpen, onClose, title, children }) {
                 <>
                     {/* Backdrop */}
                     <motion.div
-                        className="fixed inset-0 bg-bark/50 backdrop-blur-sm z-50"
+                        className="fixed inset-0 bg-base-content/30 backdrop-blur-sm z-50"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -22,26 +22,26 @@ function Modal({ isOpen, onClose, title, children }) {
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
                         transition={{ type: 'spring', damping: 25 }}
                     >
-                        <div className="glass-card h-full md:h-auto overflow-auto p-6">
-                            {/* Header */}
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-2xl font-handwritten text-bark dark:text-linen">
-                                    {title}
-                                </h2>
-                                <button
-                                    onClick={onClose}
-                                    className="p-2 rounded-full hover:bg-moss/10 transition-colors"
-                                    aria-label="Close modal"
-                                >
-                                    <svg className="w-5 h-5 text-bark dark:text-linen" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M18 6L6 18M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
+                        <div className="card bg-base-100 shadow-xl h-full md:h-auto overflow-auto">
+                            <div className="card-body">
+                                {/* Header */}
+                                <div className="flex items-center justify-between">
+                                    <h2 className="card-title text-2xl font-handwritten text-primary">
+                                        {title}
+                                    </h2>
+                                    <button
+                                        onClick={onClose}
+                                        className="btn btn-sm btn-circle btn-ghost"
+                                        aria-label="Close modal"
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
 
-                            {/* Content */}
-                            <div className="text-bark dark:text-linen-light">
-                                {children}
+                                {/* Content */}
+                                <div className="text-base-content">
+                                    {children}
+                                </div>
                             </div>
                         </div>
                     </motion.div>

@@ -4,11 +4,10 @@ import { useState, useEffect } from 'react'
 import { useSavedPrompts, useSavedBrands } from '../hooks/useDexieStorage'
 
 function HomePage() {
-    const { savedPrompts, isLoading: isLoadingPrompts } = useSavedPrompts()
-    const { savedBrands, isLoading: isLoadingBrands } = useSavedBrands()
+    const { savedPrompts } = useSavedPrompts()
+    const { savedBrands } = useSavedBrands()
     const [nicheCount, setNicheCount] = useState(0)
 
-    // Load niche count from localStorage
     useEffect(() => {
         const savedNiche = localStorage.getItem('moss-niche-results')
         setNicheCount(savedNiche ? 1 : 0)
@@ -17,11 +16,10 @@ function HomePage() {
     const promptCount = savedPrompts?.length || 0
     const brandCount = savedBrands?.length || 0
 
-
     const ctaButtons = [
-        { path: '/niche-picker', label: '🌿 Pick a Niche', icon: '🌿' },
-        { path: '/prompt-vault', label: '📜 Open Prompt Vault', icon: '📜' },
-        { path: '/branding-studio', label: '🧵 Forge a Brand', icon: '🧵' },
+        { path: '/niche-picker', label: '🌿 Pick a Niche', color: 'btn-primary' },
+        { path: '/prompt-vault', label: '📜 Open Prompt Vault', color: 'btn-secondary' },
+        { path: '/branding-studio', label: '🎨 Forge a Brand', color: 'btn-accent' },
     ]
 
     return (
@@ -30,31 +28,47 @@ function HomePage() {
             animate={{ opacity: 1 }}
             className="space-y-8 py-6"
         >
-            {/* Central Parchment Card */}
+            {/* Stats Card */}
             <motion.section
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="flex justify-center"
             >
-                <div className="parchment-card max-w-2xl w-full text-center">
-                    {/* Decorative leaf corners */}
-                    <span className="absolute top-3 left-4 text-2xl opacity-60">🍃</span>
-                    <span className="absolute bottom-3 right-4 text-2xl opacity-60 rotate-180">🍃</span>
+                <div className="card bg-base-100 shadow-xl max-w-2xl w-full">
+                    <div className="card-body text-center">
+                        <h2 className="card-title text-3xl font-handwritten text-primary justify-center">
+                            Your Cottage Garden
+                        </h2>
 
-                    {/* Stats */}
-                    <p className="stats-text text-2xl md:text-3xl font-handwritten">
-                        Saved <span className="text-moss font-bold">{promptCount}</span> prompts
-                        <span className="mx-3">•</span>
-                        <span className="text-moss font-bold">{nicheCount}</span> niche{nicheCount !== 1 ? 's' : ''} bloomed
-                        <span className="mx-3">•</span>
-                        <span className="text-moss font-bold">{brandCount}</span> brand{brandCount !== 1 ? 's' : ''}
-                    </p>
+                        {/* Stats */}
+                        <div className="stats stats-vertical sm:stats-horizontal shadow mt-4">
+                            <div className="stat">
+                                <div className="stat-figure text-primary text-2xl">📜</div>
+                                <div className="stat-title">Prompts</div>
+                                <div className="stat-value text-primary">{promptCount}</div>
+                                <div className="stat-desc">saved to vault</div>
+                            </div>
 
-                    {/* Motivational text */}
-                    <p className="mt-6 text-lg text-wood opacity-80 font-body">
-                        Your cottage awaits. Let's grow something beautiful together.
-                    </p>
+                            <div className="stat">
+                                <div className="stat-figure text-secondary text-2xl">🌸</div>
+                                <div className="stat-title">Niches</div>
+                                <div className="stat-value text-secondary">{nicheCount}</div>
+                                <div className="stat-desc">bloomed</div>
+                            </div>
+
+                            <div className="stat">
+                                <div className="stat-figure text-accent text-2xl">🎨</div>
+                                <div className="stat-title">Brands</div>
+                                <div className="stat-value text-accent">{brandCount}</div>
+                                <div className="stat-desc">created</div>
+                            </div>
+                        </div>
+
+                        <p className="mt-4 text-base-content/70">
+                            Your cottage awaits. Let's grow something beautiful together. 🌿
+                        </p>
+                    </div>
                 </div>
             </motion.section>
 
@@ -74,10 +88,7 @@ function HomePage() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.98 }}
                     >
-                        <Link
-                            to={btn.path}
-                            className="wood-cta-btn inline-block"
-                        >
+                        <Link to={btn.path} className={`btn ${btn.color} btn-lg`}>
                             {btn.label}
                         </Link>
                     </motion.div>
@@ -91,7 +102,7 @@ function HomePage() {
                 transition={{ delay: 0.8 }}
                 className="text-center pt-8"
             >
-                <p className="text-amber/60 text-sm font-body">
+                <p className="text-base-content/50 text-sm">
                     🕯️ Light a candle, pour some tea, and let's build your digital garden 🌿
                 </p>
             </motion.section>

@@ -1,31 +1,34 @@
 import { motion } from 'framer-motion'
 
-const variants = {
-    bloom: 'bg-petal text-bark',
-    moss: 'bg-moss text-cream',
-    berry: 'bg-berry text-cream',
-    linen: 'bg-linen text-bark',
+const variantClasses = {
+    primary: 'badge-primary',
+    secondary: 'badge-secondary',
+    accent: 'badge-accent',
+    neutral: 'badge-neutral',
+    ghost: 'badge-ghost',
+    outline: 'badge-outline',
+    // Legacy mappings
+    bloom: 'badge-accent',
+    moss: 'badge-primary',
+    berry: 'badge-error',
+    linen: 'badge-secondary',
 }
 
 function Badge({
     children,
-    variant = 'moss',
+    variant = 'primary',
     icon,
     animate = false,
     className = '',
 }) {
     return (
         <motion.span
-            className={`
-        inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium
-        ${variants[variant]}
-        ${className}
-      `}
+            className={`badge ${variantClasses[variant] || variantClasses.primary} gap-1 ${className}`}
             initial={animate ? { scale: 0 } : false}
             animate={animate ? { scale: 1 } : false}
             transition={{ type: 'spring', damping: 15 }}
         >
-            {icon && <span className="text-base">{icon}</span>}
+            {icon && <span>{icon}</span>}
             {children}
         </motion.span>
     )
