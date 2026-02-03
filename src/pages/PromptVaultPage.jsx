@@ -153,10 +153,10 @@ function PromptVaultPage() {
         >
             {/* Header */}
             <div className="text-center">
-                <h1 className="text-4xl font-handwritten text-bark dark:text-linen mb-2">
+                <h1 className="text-4xl font-handwritten text-base-content mb-2">
                     🔮 Enchanted Prompt Vault
                 </h1>
-                <p className="text-bark/70 dark:text-linen/70">
+                <p className="text-base-content/70">
                     100+ AI prompts to supercharge your content creation
                 </p>
             </div>
@@ -166,8 +166,8 @@ function PromptVaultPage() {
                 <button
                     onClick={() => setActiveTab('vault')}
                     className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'vault'
-                        ? 'bg-moss text-cream shadow-lg'
-                        : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                        ? 'bg-primary text-primary-content shadow-lg'
+                        : 'bg-base-200 text-base-content hover:bg-primary/10'
                         }`}
                 >
                     🔮 Vault
@@ -178,8 +178,8 @@ function PromptVaultPage() {
                 <button
                     onClick={() => setActiveTab('saved')}
                     className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'saved'
-                        ? 'bg-moss text-cream shadow-lg'
-                        : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                        ? 'bg-primary text-primary-content shadow-lg'
+                        : 'bg-base-200 text-base-content hover:bg-primary/10'
                         }`}
                 >
                     💚 Saved
@@ -204,10 +204,10 @@ function PromptVaultPage() {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search prompts by keyword, tag, or topic..."
-                                className="w-full p-4 pl-12 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
+                                className="w-full p-4 pl-12 rounded-xl border-2 border-base-300 focus:border-primary bg-base-100 text-base-content outline-none transition-colors"
                             />
                             <svg
-                                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-bark/40"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-base-content/40"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -222,8 +222,8 @@ function PromptVaultPage() {
                         <button
                             onClick={() => setSelectedCategory(null)}
                             className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${!selectedCategory
-                                ? 'bg-moss text-cream'
-                                : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                                ? 'bg-primary text-primary-content'
+                                : 'bg-base-200 text-base-content hover:bg-primary/10'
                                 }`}
                         >
                             ✨ All
@@ -233,8 +233,8 @@ function PromptVaultPage() {
                                 key={category.id}
                                 onClick={() => setSelectedCategory(category.id)}
                                 className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category.id
-                                    ? 'bg-moss text-cream'
-                                    : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                                    ? 'bg-primary text-primary-content'
+                                    : 'bg-base-200 text-base-content hover:bg-primary/10'
                                     }`}
                             >
                                 {category.icon} {category.name}
@@ -255,13 +255,13 @@ function PromptVaultPage() {
                                 >
                                     <Card className="h-full">
                                         <div className="flex items-start justify-between mb-2">
-                                            <h3 className="text-lg font-handwritten text-bark dark:text-linen">
+                                            <h3 className="text-lg font-handwritten text-base-content">
                                                 {prompt.title}
                                             </h3>
                                             <span className="text-lg">{prompt.categoryIcon}</span>
                                         </div>
 
-                                        <p className="text-sm text-bark/70 dark:text-linen/70 mb-3 line-clamp-3">
+                                        <p className="text-sm text-base-content/70 mb-3 line-clamp-3">
                                             {prompt.prompt}
                                         </p>
 
@@ -269,7 +269,7 @@ function PromptVaultPage() {
                                             {prompt.tags.map((tag) => (
                                                 <span
                                                     key={tag}
-                                                    className="text-xs px-2 py-0.5 bg-moss/10 text-moss rounded-full"
+                                                    className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full"
                                                 >
                                                     {tag}
                                                 </span>
@@ -303,7 +303,7 @@ function PromptVaultPage() {
                                                     size="sm"
                                                     variant="ghost"
                                                     onClick={() => isSaved(prompt.id) ? handleRemovePrompt(prompt.id) : handleSavePrompt(prompt)}
-                                                    className={`transition-all ${isSaved(prompt.id) ? 'text-moss' : ''}`}
+                                                    className={`transition-all ${isSaved(prompt.id) ? 'text-primary' : ''}`}
                                                 >
                                                     {isSaved(prompt.id) ? '💚' : '🤍'}
                                                 </Button>
@@ -318,7 +318,7 @@ function PromptVaultPage() {
                     {filteredPrompts.length === 0 && (
                         <div className="text-center py-12">
                             <span className="text-4xl block mb-4">🔍</span>
-                            <p className="text-bark/60 dark:text-linen/60">
+                            <p className="text-base-content/60">
                                 No prompts found. Try a different search term.
                             </p>
                         </div>
@@ -341,10 +341,10 @@ function PromptVaultPage() {
                                 value={savedSearchQuery}
                                 onChange={(e) => setSavedSearchQuery(e.target.value)}
                                 placeholder="Search your saved prompts..."
-                                className="w-full p-4 pl-12 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
+                                className="w-full p-4 pl-12 rounded-xl border-2 border-base-300 focus:border-primary bg-base-100 text-base-content outline-none transition-colors"
                             />
                             <svg
-                                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-bark/40"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-base-content/40"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -354,7 +354,7 @@ function PromptVaultPage() {
                             {savedSearchQuery && (
                                 <button
                                     onClick={() => setSavedSearchQuery('')}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-bark/40 hover:text-bark"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-base-content/40 hover:text-base-content"
                                 >
                                     ✕
                                 </button>
@@ -378,7 +378,7 @@ function PromptVaultPage() {
                                             <div className="flex items-start justify-between gap-4">
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center gap-2 mb-1">
-                                                        <h3 className="text-lg font-handwritten text-bark dark:text-linen truncate">
+                                                        <h3 className="text-lg font-handwritten text-base-content truncate">
                                                             {prompt.title}
                                                         </h3>
                                                         {prompt.category && (
@@ -387,7 +387,7 @@ function PromptVaultPage() {
                                                             </Badge>
                                                         )}
                                                     </div>
-                                                    <p className="text-sm text-bark/70 dark:text-linen/70 line-clamp-2 mb-2">
+                                                    <p className="text-sm text-base-content/70 line-clamp-2 mb-2">
                                                         {prompt.prompt}
                                                     </p>
                                                     {prompt.tags && prompt.tags.length > 0 && (
@@ -395,7 +395,7 @@ function PromptVaultPage() {
                                                             {prompt.tags.slice(0, 3).map((tag) => (
                                                                 <span
                                                                     key={tag}
-                                                                    className="text-xs px-2 py-0.5 bg-moss/10 text-moss rounded-full"
+                                                                    className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full"
                                                                 >
                                                                     {tag}
                                                                 </span>
@@ -443,10 +443,10 @@ function PromptVaultPage() {
                             {savedPrompts.length === 0 ? (
                                 <>
                                     <span className="text-4xl block mb-4">🌱</span>
-                                    <p className="text-bark/60 dark:text-linen/60 mb-2">
+                                    <p className="text-base-content/60 mb-2">
                                         Your moss garden is empty
                                     </p>
-                                    <p className="text-sm text-bark/50 dark:text-linen/50">
+                                    <p className="text-sm text-base-content/50">
                                         Save prompts from the Vault to grow your collection!
                                     </p>
                                     <Button
@@ -460,7 +460,7 @@ function PromptVaultPage() {
                             ) : (
                                 <>
                                     <span className="text-4xl block mb-4">🔍</span>
-                                    <p className="text-bark/60 dark:text-linen/60">
+                                    <p className="text-base-content/60">
                                         No saved prompts match "{savedSearchQuery}"
                                     </p>
                                 </>
@@ -482,10 +482,10 @@ function PromptVaultPage() {
                 {selectedPrompt && (
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-bark/60 dark:text-linen/60 mb-1">
+                            <label className="block text-sm font-medium text-base-content/60 mb-1">
                                 Original Prompt
                             </label>
-                            <p className="text-bark dark:text-linen bg-linen-light/30 dark:bg-bark/20 p-3 rounded-xl text-sm">
+                            <p className="text-base-content bg-base-200 p-3 rounded-xl text-sm">
                                 {selectedPrompt.prompt}
                             </p>
                         </div>
@@ -505,10 +505,10 @@ function PromptVaultPage() {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                             >
-                                <label className="block text-sm font-medium text-moss mb-1">
+                                <label className="block text-sm font-medium text-primary mb-1">
                                     Refined Prompt
                                 </label>
-                                <p className="text-bark dark:text-linen bg-moss/10 p-3 rounded-xl text-sm mb-3">
+                                <p className="text-base-content bg-primary/10 p-3 rounded-xl text-sm mb-3">
                                     {refinedPrompt}
                                 </p>
                                 <Button
@@ -538,7 +538,7 @@ function PromptVaultPage() {
             >
                 <div className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-bark/60 dark:text-linen/60 mb-2">
+                        <label className="block text-sm font-medium text-base-content/60 mb-2">
                             New title
                         </label>
                         <input
@@ -546,7 +546,7 @@ function PromptVaultPage() {
                             value={newTitle}
                             onChange={(e) => setNewTitle(e.target.value)}
                             placeholder="Enter a new title..."
-                            className="w-full p-3 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
+                            className="w-full p-3 rounded-xl border-2 border-base-300 focus:border-primary bg-base-100 text-base-content outline-none transition-colors"
                             autoFocus
                         />
                     </div>

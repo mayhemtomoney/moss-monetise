@@ -94,10 +94,10 @@ function BizBuilderPage() {
         >
             {/* Header */}
             <div className="text-center">
-                <h1 className="text-4xl font-handwritten text-bark dark:text-linen mb-2">
+                <h1 className="text-4xl font-handwritten text-base-content mb-2">
                     🌿 Herb Garden Biz Builder
                 </h1>
-                <p className="text-bark/70 dark:text-linen/70">
+                <p className="text-base-content/70">
                     Grow your business one task at a time
                 </p>
                 <Badge variant="moss" icon="🌟" className="mt-3">
@@ -112,8 +112,8 @@ function BizBuilderPage() {
                         key={m.id}
                         onClick={() => setCurrentModule(index)}
                         className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${currentModule === index
-                            ? 'bg-moss text-cream'
-                            : 'bg-linen-light/50 dark:bg-bark/30 text-bark dark:text-linen hover:bg-moss/10'
+                            ? 'bg-primary text-primary-content'
+                            : 'bg-base-200 text-base-content hover:bg-primary/10'
                             }`}
                     >
                         <span className="mr-1">{m.icon}</span>
@@ -134,10 +134,10 @@ function BizBuilderPage() {
                         <div className="flex items-center gap-3 mb-4">
                             <span className="text-3xl">{module.icon}</span>
                             <div>
-                                <h2 className="text-2xl font-handwritten text-bark dark:text-linen">
+                                <h2 className="text-2xl font-handwritten text-base-content">
                                     {module.title}
                                 </h2>
-                                <p className="text-sm text-bark/60 dark:text-linen/60">
+                                <p className="text-sm text-base-content/60">
                                     {module.subtitle}
                                 </p>
                             </div>
@@ -156,8 +156,8 @@ function BizBuilderPage() {
                                     key={task.id}
                                     layout
                                     className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isTaskCompleted(task.id)
-                                        ? 'bg-moss/10'
-                                        : 'bg-linen-light/30 dark:bg-bark/20'
+                                        ? 'bg-primary/10'
+                                        : 'bg-base-200'
                                         }`}
                                 >
                                     <button
@@ -173,7 +173,7 @@ function BizBuilderPage() {
                                             </svg>
                                         )}
                                     </button>
-                                    <span className={`flex-1 ${isTaskCompleted(task.id) ? 'line-through text-bark/50 dark:text-linen/50' : 'text-bark dark:text-linen'}`}>
+                                    <span className={`flex-1 ${isTaskCompleted(task.id) ? 'line-through text-base-content/50' : 'text-base-content'}`}>
                                         {task.task}
                                     </span>
                                     <Badge variant={isTaskCompleted(task.id) ? 'moss' : 'linen'} className="text-xs">
@@ -254,7 +254,7 @@ function BizBuilderPage() {
             {/* Earned Badges Display */}
             {earnedBadges.length > 0 && (
                 <Card hover={false}>
-                    <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                    <h3 className="text-lg font-handwritten text-base-content mb-3">
                         Your Bloom Badges
                     </h3>
                     <div className="flex flex-wrap gap-3">
@@ -263,7 +263,7 @@ function BizBuilderPage() {
                             return badgeModule && (
                                 <div key={badgeId} className="text-center">
                                     <span className="text-3xl">{badgeModule.badge.emoji}</span>
-                                    <p className="text-xs text-bark/60 dark:text-linen/60 mt-1">
+                                    <p className="text-xs text-base-content/60 mt-1">
                                         {badgeModule.badge.name}
                                     </p>
                                 </div>
@@ -289,10 +289,10 @@ function BizBuilderPage() {
                         >
                             {newBadge.emoji}
                         </motion.span>
-                        <h3 className="text-2xl font-handwritten text-moss mb-2">
+                        <h3 className="text-2xl font-handwritten text-primary mb-2">
                             {newBadge.name}
                         </h3>
-                        <p className="text-bark/70 dark:text-linen/70 mb-4">
+                        <p className="text-base-content/70 mb-4">
                             You've completed all tasks in this module! Keep blooming! 🌸
                         </p>
                         <Button onClick={() => setShowBadgeModal(false)}>

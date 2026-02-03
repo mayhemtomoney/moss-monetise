@@ -98,10 +98,10 @@ function ProductForgePage() {
         >
             {/* Header */}
             <div className="text-center">
-                <h1 className="text-4xl font-handwritten text-bark dark:text-linen mb-2">
+                <h1 className="text-4xl font-handwritten text-base-content mb-2">
                     📜 Pressed Flower Product Forge
                 </h1>
-                <p className="text-bark/70 dark:text-linen/70">
+                <p className="text-base-content/70">
                     Craft beautiful digital products with AI assistance
                 </p>
             </div>
@@ -109,7 +109,7 @@ function ProductForgePage() {
             {/* Template Selection */}
             {!selectedTemplate && (
                 <section>
-                    <h2 className="text-2xl font-handwritten text-bark dark:text-linen mb-4 text-center">
+                    <h2 className="text-2xl font-handwritten text-base-content mb-4 text-center">
                         Choose Your Creation
                     </h2>
                     <div className="grid md:grid-cols-3 gap-4">
@@ -121,10 +121,10 @@ function ProductForgePage() {
                             >
                                 <Card onClick={() => handleSelectTemplate(template)} className="text-center">
                                     <span className="text-4xl block mb-3">{template.icon}</span>
-                                    <h3 className="text-xl font-handwritten text-bark dark:text-linen mb-2">
+                                    <h3 className="text-xl font-handwritten text-base-content mb-2">
                                         {template.name}
                                     </h3>
-                                    <p className="text-sm text-bark/60 dark:text-linen/60">
+                                    <p className="text-sm text-base-content/60">
                                         {template.description}
                                     </p>
                                 </Card>
@@ -144,12 +144,12 @@ function ProductForgePage() {
                         <div className="flex items-center gap-3 mb-6">
                             <span className="text-3xl">{selectedTemplate.icon}</span>
                             <div>
-                                <h2 className="text-2xl font-handwritten text-bark dark:text-linen">
+                                <h2 className="text-2xl font-handwritten text-base-content">
                                     {selectedTemplate.name}
                                 </h2>
                                 <button
                                     onClick={() => setSelectedTemplate(null)}
-                                    className="text-sm text-moss hover:underline"
+                                    className="text-sm text-primary hover:underline"
                                 >
                                     ← Choose different template
                                 </button>
@@ -159,7 +159,7 @@ function ProductForgePage() {
                         <div className="space-y-4">
                             {selectedTemplate.fields.map((field) => (
                                 <div key={field}>
-                                    <label className="block text-sm font-medium text-bark dark:text-linen mb-2 capitalize">
+                                    <label className="block text-sm font-medium text-base-content mb-2 capitalize">
                                         {field.replace(/_/g, ' ')}
                                     </label>
                                     <input
@@ -167,7 +167,7 @@ function ProductForgePage() {
                                         value={productDetails[field] || ''}
                                         onChange={(e) => handleInputChange(field, e.target.value)}
                                         placeholder={`Enter ${field}...`}
-                                        className="w-full p-3 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
+                                        className="w-full p-3 rounded-xl border-2 border-base-300 focus:border-primary bg-base-100 text-base-content outline-none transition-colors"
                                     />
                                 </div>
                             ))}
@@ -193,31 +193,31 @@ function ProductForgePage() {
                 >
                     <Card hover={false} id="product-preview">
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-2xl font-handwritten text-moss-deep dark:text-moss-light">
+                            <h2 className="text-2xl font-handwritten text-primary-deep dark:text-primary-light">
                                 {selectedTemplate?.icon} Your Product
                             </h2>
                             <Badge variant="bloom">AI Generated</Badge>
                         </div>
 
                         {/* Preview */}
-                        <div className="bg-linen-light/30 dark:bg-bark/20 p-6 rounded-xl mb-6">
-                            <h3 className="text-xl font-handwritten text-bark dark:text-linen mb-3">
+                        <div className="bg-base-200 p-6 rounded-xl mb-6">
+                            <h3 className="text-xl font-handwritten text-base-content mb-3">
                                 {productDetails.title || selectedTemplate?.name}
                             </h3>
 
-                            <p className="text-bark/80 dark:text-linen/80 mb-4 whitespace-pre-wrap">
+                            <p className="text-base-content/80 text-base-content/80 mb-4 whitespace-pre-wrap">
                                 {generatedContent.description}
                             </p>
 
                             {generatedContent.tagline && (
-                                <p className="text-moss italic mb-3">
+                                <p className="text-primary italic mb-3">
                                     "{generatedContent.tagline}"
                                 </p>
                             )}
 
                             {generatedContent.keywords && (
                                 <div>
-                                    <span className="text-sm font-medium text-bark/60 dark:text-linen/60">SEO Keywords:</span>
+                                    <span className="text-sm font-medium text-base-content/60">SEO Keywords:</span>
                                     <div className="flex flex-wrap gap-2 mt-1">
                                         {generatedContent.keywords.map((keyword, i) => (
                                             <Badge key={i} variant="linen">{keyword}</Badge>
@@ -253,19 +253,19 @@ function ProductForgePage() {
             {/* Saved Products */}
             {savedProducts.length > 0 && (
                 <Card hover={false}>
-                    <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                    <h3 className="text-lg font-handwritten text-base-content mb-3">
                         Your Product Collection
                     </h3>
                     <div className="grid gap-2">
                         {savedProducts.slice(-5).reverse().map((product) => (
                             <div
                                 key={product.id}
-                                className="flex items-center justify-between p-3 bg-linen-light/30 dark:bg-bark/20 rounded-xl"
+                                className="flex items-center justify-between p-3 bg-base-200 rounded-xl"
                             >
-                                <span className="font-medium text-bark dark:text-linen">
+                                <span className="font-medium text-base-content">
                                     {product.details?.title || product.template}
                                 </span>
-                                <span className="text-sm text-bark/60 dark:text-linen/60">
+                                <span className="text-sm text-base-content/60">
                                     {new Date(product.savedAt).toLocaleDateString()}
                                 </span>
                             </div>

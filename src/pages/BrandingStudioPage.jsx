@@ -63,7 +63,7 @@ function SortableItem({ element }) {
                     className="w-16 h-16 rounded-xl bg-cream dark:bg-bark/50 flex items-center justify-center shadow-md"
                     style={{ fontFamily: element.value }}
                 >
-                    <span className="text-xl text-bark dark:text-linen">Aa</span>
+                    <span className="text-xl text-base-content">Aa</span>
                 </div>
             )}
         </div>
@@ -212,10 +212,10 @@ function BrandingStudioPage() {
         >
             {/* Header */}
             <div className="text-center">
-                <h1 className="text-4xl font-handwritten text-bark dark:text-linen mb-2">
+                <h1 className="text-4xl font-handwritten text-base-content mb-2">
                     🎨 Thimble Branding Studio
                 </h1>
-                <p className="text-bark/70 dark:text-linen/70">
+                <p className="text-base-content/70">
                     Create your cottagecore brand identity with drag-drop moodboards
                 </p>
                 {savedBrands.length > 0 && (
@@ -235,7 +235,7 @@ function BrandingStudioPage() {
                     >
                         🌿
                     </motion.div>
-                    <p className="text-bark/60 dark:text-linen/60 mt-2">Loading your brands...</p>
+                    <p className="text-base-content/60 mt-2">Loading your brands...</p>
                 </div>
             )}
 
@@ -245,7 +245,7 @@ function BrandingStudioPage() {
                     <div className="space-y-6">
                         {/* Brand Name Input */}
                         <Card hover={false}>
-                            <label className="block text-lg font-handwritten text-bark dark:text-linen mb-3">
+                            <label className="block text-lg font-handwritten text-base-content mb-3">
                                 What's your brand called?
                             </label>
                             <input
@@ -253,13 +253,13 @@ function BrandingStudioPage() {
                                 value={brandName}
                                 onChange={(e) => setBrandName(e.target.value)}
                                 placeholder="e.g., Mossy Meadow Creations"
-                                className="w-full p-3 rounded-xl border-2 border-moss/20 focus:border-moss bg-cream dark:bg-bark/30 text-bark dark:text-linen outline-none transition-colors"
+                                className="w-full p-3 rounded-xl border-2 border-base-300 focus:border-primary bg-base-100 text-base-content outline-none transition-colors"
                             />
                         </Card>
 
                         {/* Vibe Presets */}
                         <Card hover={false}>
-                            <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                            <h3 className="text-lg font-handwritten text-base-content mb-3">
                                 Choose your vibe
                             </h3>
                             <div className="grid grid-cols-2 gap-2">
@@ -268,8 +268,8 @@ function BrandingStudioPage() {
                                         key={vibe.name}
                                         onClick={() => setSelectedVibe(vibe)}
                                         className={`p-3 rounded-xl text-left transition-all ${selectedVibe?.name === vibe.name
-                                            ? 'bg-moss text-cream'
-                                            : 'bg-linen-light/50 dark:bg-bark/30 hover:bg-moss/10'
+                                            ? 'bg-primary text-primary-content'
+                                            : 'bg-base-200 hover:bg-primary/10'
                                             }`}
                                     >
                                         <span className="font-medium text-sm">{vibe.name}</span>
@@ -292,10 +292,10 @@ function BrandingStudioPage() {
                     {/* Right Column - Moodboard Canvas */}
                     <div className="space-y-6">
                         <Card hover={false}>
-                            <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                            <h3 className="text-lg font-handwritten text-base-content mb-3">
                                 Your Moodboard Canvas
                             </h3>
-                            <p className="text-sm text-bark/60 dark:text-linen/60 mb-4">
+                            <p className="text-sm text-base-content/60 mb-4">
                                 Drag and drop to rearrange elements
                             </p>
 
@@ -305,7 +305,7 @@ function BrandingStudioPage() {
                                 onDragEnd={handleDragEnd}
                             >
                                 <SortableContext items={elements} strategy={rectSortingStrategy}>
-                                    <div className="grid grid-cols-5 gap-2 p-4 bg-linen-light/30 dark:bg-bark/20 rounded-xl min-h-[200px]">
+                                    <div className="grid grid-cols-5 gap-2 p-4 bg-base-200 rounded-xl min-h-[200px]">
                                         {elements.map((element) => (
                                             <SortableItem key={element.id} element={element} />
                                         ))}
@@ -323,13 +323,13 @@ function BrandingStudioPage() {
                                     exit={{ opacity: 0, y: -20 }}
                                 >
                                     <Card hover={false}>
-                                        <h3 className="text-lg font-handwritten text-moss-deep dark:text-moss-light mb-4">
+                                        <h3 className="text-lg font-handwritten text-primary-deep dark:text-primary-light mb-4">
                                             ✨ AI-Generated Moodboard
                                         </h3>
 
                                         {/* Colors */}
                                         <div className="mb-4">
-                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Colors</span>
+                                            <span className="text-sm font-medium text-base-content/60">Colors</span>
                                             <div className="flex gap-2 mt-2">
                                                 {(aiMoodboard.colors || []).map((color, i) => (
                                                     <div
@@ -345,10 +345,10 @@ function BrandingStudioPage() {
 
                                         {/* Adjectives */}
                                         <div className="mb-4">
-                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Brand Adjectives</span>
+                                            <span className="text-sm font-medium text-base-content/60">Brand Adjectives</span>
                                             <div className="flex flex-wrap gap-2 mt-2">
                                                 {(aiMoodboard.adjectives || []).map((adj, i) => (
-                                                    <span key={i} className="px-3 py-1 bg-moss/10 text-moss rounded-full text-sm">
+                                                    <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
                                                         {adj}
                                                     </span>
                                                 ))}
@@ -357,8 +357,8 @@ function BrandingStudioPage() {
 
                                         {/* Imagery */}
                                         <div>
-                                            <span className="text-sm font-medium text-bark/60 dark:text-linen/60">Imagery Themes</span>
-                                            <p className="mt-1 text-bark dark:text-linen">
+                                            <span className="text-sm font-medium text-base-content/60">Imagery Themes</span>
+                                            <p className="mt-1 text-base-content">
                                                 {(aiMoodboard.imagery || []).join(' • ')}
                                             </p>
                                         </div>
@@ -378,12 +378,12 @@ function BrandingStudioPage() {
             {/* Saved Brands */}
             {savedBrands.length > 0 && (
                 <Card hover={false}>
-                    <h3 className="text-lg font-handwritten text-bark dark:text-linen mb-3">
+                    <h3 className="text-lg font-handwritten text-base-content mb-3">
                         Your Saved Brands
                     </h3>
                     <div className="grid gap-2">
                         {savedBrands.map((brand) => (
-                            <div key={brand.id} className="flex items-center justify-between p-3 bg-linen-light/30 dark:bg-bark/20 rounded-xl group">
+                            <div key={brand.id} className="flex items-center justify-between p-3 bg-base-200 rounded-xl group">
                                 <div className="flex items-center gap-3">
                                     {/* Color preview dots */}
                                     <div className="flex -space-x-1">
@@ -395,8 +395,8 @@ function BrandingStudioPage() {
                                             />
                                         ))}
                                     </div>
-                                    <span className="font-medium text-bark dark:text-linen">{brand.name}</span>
-                                    <span className="text-sm text-bark/60 dark:text-linen/60">{brand.vibe || 'Custom'}</span>
+                                    <span className="font-medium text-base-content">{brand.name}</span>
+                                    <span className="text-sm text-base-content/60">{brand.vibe || 'Custom'}</span>
                                 </div>
                                 <div className="flex gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
                                     <Button size="sm" variant="ghost" onClick={() => openPreview(brand)} title="Preview">
@@ -436,14 +436,14 @@ function BrandingStudioPage() {
                     <div className="space-y-4">
                         {/* Exportable preview area */}
                         <div ref={previewRef} className="p-6 bg-cream rounded-xl space-y-4">
-                            <h2 className="text-2xl font-handwritten text-bark text-center">
+                            <h2 className="text-2xl font-handwritten text-base-content text-center">
                                 {previewBrand.name}
                             </h2>
 
                             {/* Color Palette */}
                             {previewBrand.palette && previewBrand.palette.length > 0 && (
                                 <div>
-                                    <span className="text-sm font-medium text-bark/60 block mb-2">Color Palette</span>
+                                    <span className="text-sm font-medium text-base-content/60 block mb-2">Color Palette</span>
                                     <div className="flex gap-2 justify-center">
                                         {previewBrand.palette.map((color, i) => (
                                             <div key={i} className="text-center">
@@ -451,7 +451,7 @@ function BrandingStudioPage() {
                                                     className="w-12 h-12 rounded-lg shadow-md"
                                                     style={{ backgroundColor: color }}
                                                 />
-                                                <span className="text-xs text-bark/60 mt-1 block">{color}</span>
+                                                <span className="text-xs text-base-content/60 mt-1 block">{color}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -461,7 +461,7 @@ function BrandingStudioPage() {
                             {/* Vibe */}
                             {previewBrand.vibe && (
                                 <div className="text-center">
-                                    <span className="text-sm font-medium text-bark/60 block mb-1">Vibe</span>
+                                    <span className="text-sm font-medium text-base-content/60 block mb-1">Vibe</span>
                                     <Badge variant="moss">{previewBrand.vibe}</Badge>
                                 </div>
                             )}
@@ -469,10 +469,10 @@ function BrandingStudioPage() {
                             {/* Adjectives */}
                             {previewBrand.aiMoodboard?.adjectives && (
                                 <div className="text-center">
-                                    <span className="text-sm font-medium text-bark/60 block mb-2">Brand Personality</span>
+                                    <span className="text-sm font-medium text-base-content/60 block mb-2">Brand Personality</span>
                                     <div className="flex flex-wrap gap-2 justify-center">
                                         {previewBrand.aiMoodboard.adjectives.map((adj, i) => (
-                                            <span key={i} className="px-3 py-1 bg-moss/10 text-moss rounded-full text-sm">
+                                            <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
                                                 {adj}
                                             </span>
                                         ))}
