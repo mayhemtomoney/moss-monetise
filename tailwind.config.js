@@ -23,6 +23,7 @@ export default {
                 berry: '#8B4557',
             },
             fontFamily: {
+                fell: ['"IM Fell English"', 'serif'],
                 handwritten: ['Caveat', 'cursive'],
                 body: ['Inter', 'sans-serif'],
                 elegant: ['Playfair Display', 'serif'],

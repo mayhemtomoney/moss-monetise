@@ -39,20 +39,20 @@ function Layout({ children }) {
                         </label>
                     </div>
 
-                    {/* Logo - left */}
+                    {/* Logo - left - IM Fell English */}
                     <div className="flex-1">
-                        <h1 className="text-2xl lg:text-3xl font-handwritten text-primary">Moss & Monetise</h1>
+                        <h1 className="text-3xl lg:text-4xl font-fell text-primary">Moss & Monetise</h1>
                     </div>
 
                     {/* Tagline - right */}
                     <div className="flex-none hidden sm:block">
-                        <span className="text-base-content/60 text-sm">Your cottagecore path</span>
+                        <span className="text-base-content/60 font-fell text-lg">Your cottagecore path</span>
                     </div>
                 </nav>
 
                 {/* Page content with top padding for navbar */}
                 <motion.main
-                    className="flex-1 pt-24 pb-20 lg:pb-8 px-4 lg:px-6 lg:ml-0"
+                    className="flex-1 pt-24 pb-20 lg:pb-8 px-4 lg:px-6 lg:ml-0 font-fell"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
@@ -64,16 +64,11 @@ function Layout({ children }) {
                 </motion.main>
             </div>
 
-            {/* Sidebar drawer - 280px */}
+            {/* Sidebar drawer - 280px, vertically centered */}
             <div className="drawer-side z-50">
                 <label htmlFor="main-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                <aside className="bg-base-100 w-70 min-h-full border-r border-base-300">
-                    {/* Sidebar header */}
-                    <div className="h-20 flex items-center px-4 border-b border-base-300 lg:hidden">
-                        <h2 className="text-xl font-handwritten text-primary">Moss & Monetise</h2>
-                    </div>
-
-                    {/* Navigation menu */}
+                <aside className="bg-base-100 w-70 min-h-screen border-r border-base-300 flex flex-col justify-center">
+                    {/* Navigation menu - vertically centered */}
                     <ul className="menu p-4 gap-1">
                         {navItems.map((item) => (
                             <li key={item.path}>
@@ -81,13 +76,13 @@ function Layout({ children }) {
                                     to={item.path}
                                     onClick={() => setDrawerOpen(false)}
                                     className={({ isActive }) =>
-                                        `flex items-center gap-3 py-3 px-4 rounded-lg text-base ${isActive
+                                        `flex items-center gap-3 py-3 px-4 rounded-lg font-fell text-lg ${isActive
                                             ? 'bg-primary text-primary-content font-medium'
                                             : 'hover:bg-base-200'
                                         }`
                                     }
                                 >
-                                    <span className="text-lg">{item.icon}</span>
+                                    <span className="text-xl">{item.icon}</span>
                                     <span>{item.label}</span>
                                 </NavLink>
                             </li>
@@ -107,7 +102,7 @@ function Layout({ children }) {
                         }
                     >
                         <span className="text-lg">{item.icon}</span>
-                        <span className="btm-nav-label text-xs">{item.label}</span>
+                        <span className="btm-nav-label font-fell text-xs">{item.label}</span>
                     </NavLink>
                 ))}
             </nav>
